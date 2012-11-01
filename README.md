@@ -1,6 +1,6 @@
-#FWTProgressView
+#FWTPopoverView
 
-![FWTProgressView screenshot](http://grab.by/g0rw)
+![FWTPopoverView screenshot](http://grab.by/hc1q)
 
 
 FWTProgressView shows the progress of a task over time. The progress image, by default, is animated from left to right. As with UIProgressView you can set the progress value with or without animation.
@@ -36,45 +36,39 @@ FWTProgressView uses its default values if any of the passed params is nil.
 
 ##How to use it: configure
 
-**animationType** transition type that can be used (animation direction)
+####FWTPopoverBackgroundHelper 
 
-**animationDuration** amount of time it takes to move from 0 to progressImage width.
+####FWTPopoverAnimationHelper
 
-**contentHorizontalInset** the value to use to adjust the width of the content view. To create an inset rectangle, specify a positive value. To create a larger, encompassing rectangle, specify a negative value.
+####FWTPopoverArrow 
 
-**contentCornerRadius** specifies a radius used to draw the rounded corners of the content view. The default value is 0.0.
-
-**borderEdgeInsets** the inset or outset margins for the edges of the border view. Use this property to resize and reposition the effective rectangle.
 
 
 ##View hierarchy
 For a better understanding it can be useful to see the subviews/sublayers involved. Between braces the available public properties.
 
-- **progressView** {progress, animationType, animationDuration}
-	- **contentView** {contentHorizontalInset, contentCornerRadius} 
-		- **progressLayer**
-		- **trackView**
-	- **borderView** {borderEdgeInsets}
+- **popoverView** {contentSize, adjustPositionInSuperviewEnabled}
+    - **backgroundImageView**
+	- **contentView** 
 
 ##For your interest
-The class method **defaultProgressView** creates for you the following images:
 
-* progressImage		![FWTProgressView progressImage](http://grab.by/g9Lq)
-* trackImage		![FWTProgressView trackImage](http://grab.by/g9Ly)
-* borderImage		![FWTProgressView borderImage](http://grab.by/g9LA) 
 
 ##Demo
 The sample project shows how to use and how to create a custom FWTProgressView.
 If you don't have time to read it this is what you need:
 
-    // i'm happy with the default
-    self.progressView = [FWTProgressView defaultProgressView];
-    [self.view addSubview:self.progressView];
+	//	present
+	FWTPopoverView *popoverView = [[[FWTPopoverView alloc] init] autorelease];
+    [popoverView presentFromRect:rect
+                          inView:self.view
+         permittedArrowDirection:FWTPopoverArrowDirectionUp
+                        animated:YES];
+                        
+    […]
     
-	// set the frame width
-    CGRect frame = CGRectInset(self.view.bounds, 10.0f, .0f);
-    frame.size.height = self.progressView.frame.size.height;
-    self.progressView.frame = frame;
+    //	dismiss
+    [popoverView dismissPopoverAnimated:YES];
 
 
 ##Licensing

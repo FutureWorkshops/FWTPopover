@@ -19,6 +19,8 @@
 		A94900FF1641964E00864A8B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A94900FE1641964E00864A8B /* QuartzCore.framework */; };
 		A94901011641965100864A8B /* libFWTPopoverView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A94901001641965100864A8B /* libFWTPopoverView.a */; };
 		A9490104164196B000864A8B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A9490103164196B000864A8B /* ViewController.m */; };
+		A949011C1642934200864A8B /* SmokeParticle.png in Resources */ = {isa = PBXBuildFile; fileRef = A949011B1642934200864A8B /* SmokeParticle.png */; };
+		A949011E1642959600864A8B /* fwlogo.png in Resources */ = {isa = PBXBuildFile; fileRef = A949011D1642959600864A8B /* fwlogo.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +41,8 @@
 		A94901001641965100864A8B /* libFWTPopoverView.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFWTPopoverView.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9490102164196B000864A8B /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		A9490103164196B000864A8B /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		A949011B1642934200864A8B /* SmokeParticle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SmokeParticle.png; sourceTree = "<group>"; };
+		A949011D1642959600864A8B /* fwlogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fwlogo.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +105,8 @@
 		A94900E81641963600864A8B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				A949011D1642959600864A8B /* fwlogo.png */,
+				A949011B1642934200864A8B /* SmokeParticle.png */,
 				A94900E91641963600864A8B /* FWTPopoverView_Test-Info.plist */,
 				A94900EA1641963600864A8B /* InfoPlist.strings */,
 				A94900ED1641963600864A8B /* main.m */,
@@ -167,6 +173,8 @@
 				A94900F41641963600864A8B /* Default.png in Resources */,
 				A94900F61641963600864A8B /* Default@2x.png in Resources */,
 				A94900F81641963600864A8B /* Default-568h@2x.png in Resources */,
+				A949011C1642934200864A8B /* SmokeParticle.png in Resources */,
+				A949011E1642959600864A8B /* fwlogo.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
