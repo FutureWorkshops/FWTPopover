@@ -1,0 +1,277 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A94900AE1641942800864A8B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A94900AD1641942800864A8B /* Foundation.framework */; };
+		A94900BC1641943C00864A8B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A94900BB1641943C00864A8B /* QuartzCore.framework */; };
+		A94900BE1641944300864A8B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A94900BD1641944300864A8B /* CoreGraphics.framework */; };
+		A94900C01641944D00864A8B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A94900BF1641944D00864A8B /* UIKit.framework */; };
+		A94900C91641948700864A8B /* FWTPopoverAnimationHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = A94900C21641948700864A8B /* FWTPopoverAnimationHelper.m */; };
+		A94900CA1641948700864A8B /* FWTPopoverArrow.m in Sources */ = {isa = PBXBuildFile; fileRef = A94900C41641948700864A8B /* FWTPopoverArrow.m */; };
+		A94900CB1641948700864A8B /* FWTPopoverBackgroundHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = A94900C61641948700864A8B /* FWTPopoverBackgroundHelper.m */; };
+		A94900CC1641948700864A8B /* FWTPopoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = A94900C81641948700864A8B /* FWTPopoverView.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		A94900A81641942800864A8B /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/${PRODUCT_NAME}";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		A94900AA1641942800864A8B /* libFWTPopoverView.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFWTPopoverView.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		A94900AD1641942800864A8B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		A94900B11641942800864A8B /* FWTPopoverView-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FWTPopoverView-Prefix.pch"; sourceTree = "<group>"; };
+		A94900BB1641943C00864A8B /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		A94900BD1641944300864A8B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		A94900BF1641944D00864A8B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		A94900C11641948700864A8B /* FWTPopoverAnimationHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FWTPopoverAnimationHelper.h; sourceTree = "<group>"; };
+		A94900C21641948700864A8B /* FWTPopoverAnimationHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FWTPopoverAnimationHelper.m; sourceTree = "<group>"; };
+		A94900C31641948700864A8B /* FWTPopoverArrow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FWTPopoverArrow.h; sourceTree = "<group>"; };
+		A94900C41641948700864A8B /* FWTPopoverArrow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FWTPopoverArrow.m; sourceTree = "<group>"; };
+		A94900C51641948700864A8B /* FWTPopoverBackgroundHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FWTPopoverBackgroundHelper.h; sourceTree = "<group>"; };
+		A94900C61641948700864A8B /* FWTPopoverBackgroundHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FWTPopoverBackgroundHelper.m; sourceTree = "<group>"; };
+		A94900C71641948700864A8B /* FWTPopoverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FWTPopoverView.h; sourceTree = "<group>"; };
+		A94900C81641948700864A8B /* FWTPopoverView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FWTPopoverView.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A94900A71641942800864A8B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A94900C01641944D00864A8B /* UIKit.framework in Frameworks */,
+				A94900BE1641944300864A8B /* CoreGraphics.framework in Frameworks */,
+				A94900BC1641943C00864A8B /* QuartzCore.framework in Frameworks */,
+				A94900AE1641942800864A8B /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A949009F1641942800864A8B = {
+			isa = PBXGroup;
+			children = (
+				A94900AF1641942800864A8B /* FWTPopoverView */,
+				A94900AC1641942800864A8B /* Frameworks */,
+				A94900AB1641942800864A8B /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A94900AB1641942800864A8B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A94900AA1641942800864A8B /* libFWTPopoverView.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A94900AC1641942800864A8B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A94900BF1641944D00864A8B /* UIKit.framework */,
+				A94900BD1641944300864A8B /* CoreGraphics.framework */,
+				A94900BB1641943C00864A8B /* QuartzCore.framework */,
+				A94900AD1641942800864A8B /* Foundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A94900AF1641942800864A8B /* FWTPopoverView */ = {
+			isa = PBXGroup;
+			children = (
+				A94900C71641948700864A8B /* FWTPopoverView.h */,
+				A94900C81641948700864A8B /* FWTPopoverView.m */,
+				A94900CD1641949D00864A8B /* Private */,
+				A94900B01641942800864A8B /* Supporting Files */,
+			);
+			path = FWTPopoverView;
+			sourceTree = "<group>";
+		};
+		A94900B01641942800864A8B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				A94900B11641942800864A8B /* FWTPopoverView-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A94900CD1641949D00864A8B /* Private */ = {
+			isa = PBXGroup;
+			children = (
+				A94900C51641948700864A8B /* FWTPopoverBackgroundHelper.h */,
+				A94900C61641948700864A8B /* FWTPopoverBackgroundHelper.m */,
+				A94900C11641948700864A8B /* FWTPopoverAnimationHelper.h */,
+				A94900C21641948700864A8B /* FWTPopoverAnimationHelper.m */,
+				A94900C31641948700864A8B /* FWTPopoverArrow.h */,
+				A94900C41641948700864A8B /* FWTPopoverArrow.m */,
+			);
+			name = Private;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A94900A91641942800864A8B /* FWTPopoverView */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A94900B81641942800864A8B /* Build configuration list for PBXNativeTarget "FWTPopoverView" */;
+			buildPhases = (
+				A94900A61641942800864A8B /* Sources */,
+				A94900A71641942800864A8B /* Frameworks */,
+				A94900A81641942800864A8B /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FWTPopoverView;
+			productName = FWTPopoverView;
+			productReference = A94900AA1641942800864A8B /* libFWTPopoverView.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A94900A11641942800864A8B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0450;
+				ORGANIZATIONNAME = "Marco Meschini";
+			};
+			buildConfigurationList = A94900A41641942800864A8B /* Build configuration list for PBXProject "FWTPopoverView" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = A949009F1641942800864A8B;
+			productRefGroup = A94900AB1641942800864A8B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A94900A91641942800864A8B /* FWTPopoverView */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A94900A61641942800864A8B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A94900C91641948700864A8B /* FWTPopoverAnimationHelper.m in Sources */,
+				A94900CA1641948700864A8B /* FWTPopoverArrow.m in Sources */,
+				A94900CB1641948700864A8B /* FWTPopoverBackgroundHelper.m in Sources */,
+				A94900CC1641948700864A8B /* FWTPopoverView.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		A94900B61641942800864A8B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		A94900B71641942800864A8B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A94900B91641942800864A8B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/FWTPopoverView.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FWTPopoverView/FWTPopoverView-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		A94900BA1641942800864A8B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/FWTPopoverView.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FWTPopoverView/FWTPopoverView-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A94900A41641942800864A8B /* Build configuration list for PBXProject "FWTPopoverView" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A94900B61641942800864A8B /* Debug */,
+				A94900B71641942800864A8B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A94900B81641942800864A8B /* Build configuration list for PBXNativeTarget "FWTPopoverView" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A94900B91641942800864A8B /* Debug */,
+				A94900BA1641942800864A8B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A94900A11641942800864A8B /* Project object */;
+}

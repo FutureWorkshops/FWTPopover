@@ -1,0 +1,304 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A94900E21641963600864A8B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A94900E11641963600864A8B /* UIKit.framework */; };
+		A94900E41641963600864A8B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A94900E31641963600864A8B /* Foundation.framework */; };
+		A94900E61641963600864A8B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A94900E51641963600864A8B /* CoreGraphics.framework */; };
+		A94900EC1641963600864A8B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A94900EA1641963600864A8B /* InfoPlist.strings */; };
+		A94900EE1641963600864A8B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A94900ED1641963600864A8B /* main.m */; };
+		A94900F21641963600864A8B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A94900F11641963600864A8B /* AppDelegate.m */; };
+		A94900F41641963600864A8B /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = A94900F31641963600864A8B /* Default.png */; };
+		A94900F61641963600864A8B /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A94900F51641963600864A8B /* Default@2x.png */; };
+		A94900F81641963600864A8B /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A94900F71641963600864A8B /* Default-568h@2x.png */; };
+		A94900FF1641964E00864A8B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A94900FE1641964E00864A8B /* QuartzCore.framework */; };
+		A94901011641965100864A8B /* libFWTPopoverView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A94901001641965100864A8B /* libFWTPopoverView.a */; };
+		A9490104164196B000864A8B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A9490103164196B000864A8B /* ViewController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		A94900DD1641963600864A8B /* FWTPopoverView_Test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FWTPopoverView_Test.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A94900E11641963600864A8B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		A94900E31641963600864A8B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		A94900E51641963600864A8B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		A94900E91641963600864A8B /* FWTPopoverView_Test-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FWTPopoverView_Test-Info.plist"; sourceTree = "<group>"; };
+		A94900EB1641963600864A8B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		A94900ED1641963600864A8B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		A94900EF1641963600864A8B /* FWTPopoverView_Test-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FWTPopoverView_Test-Prefix.pch"; sourceTree = "<group>"; };
+		A94900F01641963600864A8B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		A94900F11641963600864A8B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		A94900F31641963600864A8B /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		A94900F51641963600864A8B /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		A94900F71641963600864A8B /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		A94900FE1641964E00864A8B /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		A94901001641965100864A8B /* libFWTPopoverView.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFWTPopoverView.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		A9490102164196B000864A8B /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		A9490103164196B000864A8B /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A94900DA1641963600864A8B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A94901011641965100864A8B /* libFWTPopoverView.a in Frameworks */,
+				A94900FF1641964E00864A8B /* QuartzCore.framework in Frameworks */,
+				A94900E21641963600864A8B /* UIKit.framework in Frameworks */,
+				A94900E41641963600864A8B /* Foundation.framework in Frameworks */,
+				A94900E61641963600864A8B /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A94900D21641963600864A8B = {
+			isa = PBXGroup;
+			children = (
+				A94900E71641963600864A8B /* FWTPopoverView_Test */,
+				A94900E01641963600864A8B /* Frameworks */,
+				A94900DE1641963600864A8B /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A94900DE1641963600864A8B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A94900DD1641963600864A8B /* FWTPopoverView_Test.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A94900E01641963600864A8B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A94901001641965100864A8B /* libFWTPopoverView.a */,
+				A94900FE1641964E00864A8B /* QuartzCore.framework */,
+				A94900E11641963600864A8B /* UIKit.framework */,
+				A94900E31641963600864A8B /* Foundation.framework */,
+				A94900E51641963600864A8B /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A94900E71641963600864A8B /* FWTPopoverView_Test */ = {
+			isa = PBXGroup;
+			children = (
+				A94900F01641963600864A8B /* AppDelegate.h */,
+				A94900F11641963600864A8B /* AppDelegate.m */,
+				A9490102164196B000864A8B /* ViewController.h */,
+				A9490103164196B000864A8B /* ViewController.m */,
+				A94900E81641963600864A8B /* Supporting Files */,
+			);
+			path = FWTPopoverView_Test;
+			sourceTree = "<group>";
+		};
+		A94900E81641963600864A8B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				A94900E91641963600864A8B /* FWTPopoverView_Test-Info.plist */,
+				A94900EA1641963600864A8B /* InfoPlist.strings */,
+				A94900ED1641963600864A8B /* main.m */,
+				A94900EF1641963600864A8B /* FWTPopoverView_Test-Prefix.pch */,
+				A94900F31641963600864A8B /* Default.png */,
+				A94900F51641963600864A8B /* Default@2x.png */,
+				A94900F71641963600864A8B /* Default-568h@2x.png */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A94900DC1641963600864A8B /* FWTPopoverView_Test */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A94900FB1641963600864A8B /* Build configuration list for PBXNativeTarget "FWTPopoverView_Test" */;
+			buildPhases = (
+				A94900D91641963600864A8B /* Sources */,
+				A94900DA1641963600864A8B /* Frameworks */,
+				A94900DB1641963600864A8B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FWTPopoverView_Test;
+			productName = FWTPopoverView_Test;
+			productReference = A94900DD1641963600864A8B /* FWTPopoverView_Test.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A94900D41641963600864A8B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0450;
+				ORGANIZATIONNAME = "Marco Meschini";
+			};
+			buildConfigurationList = A94900D71641963600864A8B /* Build configuration list for PBXProject "FWTPopoverView_Test" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = A94900D21641963600864A8B;
+			productRefGroup = A94900DE1641963600864A8B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A94900DC1641963600864A8B /* FWTPopoverView_Test */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A94900DB1641963600864A8B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A94900EC1641963600864A8B /* InfoPlist.strings in Resources */,
+				A94900F41641963600864A8B /* Default.png in Resources */,
+				A94900F61641963600864A8B /* Default@2x.png in Resources */,
+				A94900F81641963600864A8B /* Default-568h@2x.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A94900D91641963600864A8B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A94900EE1641963600864A8B /* main.m in Sources */,
+				A94900F21641963600864A8B /* AppDelegate.m in Sources */,
+				A9490104164196B000864A8B /* ViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		A94900EA1641963600864A8B /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A94900EB1641963600864A8B /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		A94900F91641963600864A8B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../FWTPopoverView/FWTPopoverView/\"/**";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A94900FA1641963600864A8B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../FWTPopoverView/FWTPopoverView/\"/**";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A94900FC1641963600864A8B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FWTPopoverView_Test/FWTPopoverView_Test-Prefix.pch";
+				INFOPLIST_FILE = "FWTPopoverView_Test/FWTPopoverView_Test-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../Library/Developer/Xcode/DerivedData/FWTPopoverView-btyyvkntlkicerfbutllchdqvznt/Build/Products/Debug-iphoneos\"",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		A94900FD1641963600864A8B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FWTPopoverView_Test/FWTPopoverView_Test-Prefix.pch";
+				INFOPLIST_FILE = "FWTPopoverView_Test/FWTPopoverView_Test-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../Library/Developer/Xcode/DerivedData/FWTPopoverView-btyyvkntlkicerfbutllchdqvznt/Build/Products/Debug-iphoneos\"",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A94900D71641963600864A8B /* Build configuration list for PBXProject "FWTPopoverView_Test" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A94900F91641963600864A8B /* Debug */,
+				A94900FA1641963600864A8B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A94900FB1641963600864A8B /* Build configuration list for PBXNativeTarget "FWTPopoverView_Test" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A94900FC1641963600864A8B /* Debug */,
+				A94900FD1641963600864A8B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A94900D41641963600864A8B /* Project object */;
+}
