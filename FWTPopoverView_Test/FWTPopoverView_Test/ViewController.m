@@ -11,14 +11,12 @@
 
 @interface ViewController ()
 {
-    FWTPopoverView *_popoverView;
     UIView *_touchPointView;
     UISegmentedControl *_segmentedControl;
     FWTPopoverArrowDirection _popoverArrowDirection;
     BOOL _manyPopoversEnabled;
 }
 
-@property (nonatomic, retain) FWTPopoverView *popoverView;
 @property (nonatomic, retain) UIView *touchPointView;
 @property (nonatomic, retain) UISegmentedControl *segmentedControl;
 @property (nonatomic, assign) FWTPopoverArrowDirection popoverArrowDirection;
@@ -26,7 +24,6 @@
 @end
 
 @implementation ViewController
-@synthesize popoverView = _popoverView;
 @synthesize segmentedControl = _segmentedControl;
 @synthesize popoverArrowDirection = _popoverArrowDirection;
 @synthesize touchPointView = _touchPointView;
@@ -34,7 +31,6 @@
 - (void)dealloc
 {
     self.touchPointView = nil;
-    self.popoverView = nil;
     self.segmentedControl = nil;
     [super dealloc];
 }
@@ -85,19 +81,6 @@
     }
     
     return self->_segmentedControl;
-}
-
-- (FWTPopoverView *)popoverView
-{
-    if (!self->_popoverView)
-    {
-        self->_popoverView = [[FWTPopoverView alloc] init];      
-        self->_popoverView.animationHelper.dismissCompletionBlock = ^(BOOL finished){
-            self.popoverView = nil;
-        };
-    }
-    
-    return self->_popoverView;
 }
 
 - (UIView *)touchPointView
@@ -166,6 +149,7 @@
         popoverView = [[[FWTPopoverView alloc] init] autorelease];
         popoverView.tag = self.manyPopoversEnabled ? 0 : 0xbeef;
         popoverView.backgroundHelper.fillColor = self.manyPopoversEnabled ? [self _pleaseGiveMeARandomColor].CGColor : popoverView.backgroundHelper.fillColor;
+        popoverView.backgroundHelper.strokeColor = self.manyPopoversEnabled ? [self _pleaseGiveMeARandomColor].CGColor : popoverView.backgroundHelper.strokeColor;
         [popoverView presentFromRect:self.touchPointView.frame
                               inView:self.view
              permittedArrowDirection:self.popoverArrowDirection
