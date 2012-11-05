@@ -13,6 +13,14 @@
 @property (nonatomic, readwrite, assign) FWTPopoverArrowDirection direction;
 @end
 
+struct FWTPopoverViewFrameAndArrowAdjustment
+{
+    CGRect frame;
+    CGFloat dx;
+    CGFloat dy;
+    NSInteger direction;
+};
+
 @interface FWTPopoverView ()
 {
     struct
@@ -196,47 +204,41 @@
     return midPoint;
 }
 
-- (void)_adjustAndSetFrame:(CGRect)frame inSuperview:(UIView *)view
+- (struct FWTPopoverViewFrameAndArrowAdjustment)_adjustmentForFrame:(CGRect)frame inSuperview:(UIView *)view
 {
-    CGFloat dX = .0f;
-    CGFloat dY = .0f;
-    NSInteger direction = 1;
-    if (self.adjustPositionInSuperviewEnabled)
+    struct FWTPopoverViewFrameAndArrowAdjustment toReturn;
+    toReturn.frame = frame;
+    toReturn.dx = .0f;
+    toReturn.dy = .0f;
+    toReturn.direction = 1;
+    
+    CGRect intersection = CGRectIntersection(view.bounds, toReturn.frame);    
+    CGFloat frameWidth = toReturn.frame.size.width;
+    CGFloat frameHeight = toReturn.frame.size.height;
+    if (intersection.size.width != frameWidth)
     {
-        CGRect intersection = CGRectIntersection(view.bounds, frame);
-
-        CGFloat frameWidth = frame.size.width;
-        CGFloat frameHeight = frame.size.height;
-        if (intersection.size.width != frameWidth)
+        toReturn.dx = frameWidth-intersection.size.width;
+        if (intersection.origin.x == 0)
         {
-            dX = frameWidth-intersection.size.width;
-            if (intersection.origin.x == 0)
-            {
-                frame = CGRectOffset(frame, dX, .0f);
-                direction = -1;
-            }
-            else
-                frame = CGRectOffset(frame, -dX, .0f);
+            toReturn.frame = CGRectOffset(toReturn.frame, toReturn.dx, .0f);
+            toReturn.direction = -1;
         }
-        if (intersection.size.height != frameHeight)
+        else
+            toReturn.frame = CGRectOffset(toReturn.frame, -toReturn.dx, .0f);
+    }
+    if (intersection.size.height != frameHeight)
+    {
+        toReturn.dy = frameHeight-intersection.size.height;
+        if (intersection.origin.y == 0)
         {
-            dY = frameHeight-intersection.size.height;
-            if (intersection.origin.y == 0)
-            {
-                frame = CGRectOffset(frame, .0f, dY);
-                direction = -1;
-            }
-            else
-                frame = CGRectOffset(frame, .0f, -dY);
+            toReturn.frame = CGRectOffset(toReturn.frame, .0f, toReturn.dy);
+            toReturn.direction = -1;
         }
+        else
+            toReturn.frame = CGRectOffset(toReturn.frame, .0f, -toReturn.dy);
     }
     
-    //
-    self.frame = CGRectIntegral(frame);
-    
-    //
-    if (self.adjustPositionInSuperviewEnabled)
-        self.arrow.offset = [self _arrowOffsetForDeltaX:dX deltaY:dY direction:direction];
+    return toReturn;
 }
 
 #pragma mark - Public
@@ -264,12 +266,20 @@
     currentSize.height += self.edgeInsets.top + self.edgeInsets.bottom;
     
     //
-    CGPoint midPoint = [self _midPointForRect:rect popoverSize:currentSize arrowDirection:self.arrow.direction];
+    CGPoint newOrigin = [self _midPointForRect:rect popoverSize:currentSize arrowDirection:self.arrow.direction];
     CGRect frame = CGRectZero;
-    frame.origin = midPoint;
+    frame.origin = newOrigin;
     frame.size = currentSize;
-    [self _adjustAndSetFrame:frame inSuperview:view];
-        
+    frame = CGRectIntegral(frame);
+    self.frame = frame;
+    if (self.adjustPositionInSuperviewEnabled)
+    {
+        struct FWTPopoverViewFrameAndArrowAdjustment adj = [self _adjustmentForFrame:frame inSuperview:view];
+        self.frame = adj.frame;
+        self.arrow.offset = [self _arrowOffsetForDeltaX:adj.dx deltaY:adj.dy direction:adj.direction];
+    }
+    
+    
     //
     self.backgroundImageView.image = [self.backgroundHelper resizableBackgroundImageForSize:currentSize edgeInsets:self.edgeInsets];
 
@@ -307,9 +317,13 @@
 
 - (void)adjustPositionToRect:(CGRect)rect
 {
-    CGPoint p = [self _midPointForRect:rect popoverSize:self.bounds.size arrowDirection:self.arrow.direction];
+    CGPoint newOrigin = [self _midPointForRect:rect popoverSize:self.bounds.size arrowDirection:self.arrow.direction];
     CGRect frame = self.frame;
-    frame.origin = p;
+    frame.origin = newOrigin;
+
+    if (self.adjustPositionInSuperviewEnabled)
+        frame = [self _adjustmentForFrame:frame inSuperview:self.superview].frame;
+    
     self.frame = frame;
 }
 
