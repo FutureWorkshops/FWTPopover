@@ -37,7 +37,6 @@ struct FWTPopoverViewFrameAndArrowAdjustment
 //  Private
 - (CGFloat)_arrowOffsetForDeltaX:(CGFloat)dX deltaY:(CGFloat)dY direction:(NSInteger)direction;
 - (CGPoint)_midPointForRect:(CGRect)rect popoverSize:(CGSize)popoverSize arrowDirection:(FWTPopoverArrowDirection)arrowDirections;
-- (void)_adjustAndSetFrame:(CGRect)frame inSuperview:(UIView *)view;
 
 @end
 
@@ -335,7 +334,7 @@ struct FWTPopoverViewFrameAndArrowAdjustment
     };
     
     if (animated)
-        [UIView animateWithDuration:.25f animations:adjustPositionBlock];
+        [UIView animateWithDuration:self.animationHelper.adjustPositionDuration animations:adjustPositionBlock];
     else
         adjustPositionBlock();
 }

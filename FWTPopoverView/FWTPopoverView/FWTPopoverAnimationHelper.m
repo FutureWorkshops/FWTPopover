@@ -33,6 +33,7 @@
         self.annotationView = annotationView;
         self.presentDuration = .25f;
         self.dismissDuration = .25f;
+        self.adjustPositionDuration = .25f;
         self.presentDelay = .0f;
         self.dismissDelay = .0f;
         self.presentOptions = UIViewAnimationOptionCurveEaseIn;
