@@ -35,8 +35,8 @@
         self.dismissDuration = .25f;
         self.presentDelay = .0f;
         self.dismissDelay = .0f;
-        self.presentOptions = UIViewAnimationCurveEaseIn;
-        self.dismissOptions = UIViewAnimationCurveEaseIn;
+        self.presentOptions = UIViewAnimationOptionCurveEaseIn;
+        self.dismissOptions = UIViewAnimationOptionCurveEaseIn;
         
         __block typeof(self.annotationView) theAnnotationView = self.annotationView;
         self.prepareBlock = ^{ theAnnotationView.alpha = .0f; };

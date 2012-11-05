@@ -80,7 +80,7 @@ typedef NSUInteger AxisType;
         capInsets = UIEdgeInsetsMake(edgeInsets.top + self.cornerRadius, edgeInsets.left + self.cornerRadius, edgeInsets.bottom + self.cornerRadius, edgeInsets.right + self.cornerRadius);
     }
     
-    NSLog(@"contextSize:%@", NSStringFromCGSize(contextSize));
+//    NSLog(@"contextSize:%@", NSStringFromCGSize(contextSize));
     
     //
     CGRect rect = CGRectMake(.0f, .0f, contextSize.width, contextSize.height);
@@ -168,7 +168,7 @@ typedef NSUInteger AxisType;
 #pragma mark - Private
 - (UIImage *)_backgroundImageForSize:(CGSize)size
 {
-    NSLog(@"_backgroundImageForSize:%@", NSStringFromCGSize(size));
+//    NSLog(@"_backgroundImageForSize:%@", NSStringFromCGSize(size));
 
     //
     self.frame = CGRectMake(.0f, .0f, size.width, size.height);

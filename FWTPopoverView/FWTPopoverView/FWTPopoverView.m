@@ -65,15 +65,22 @@
 //        self.contentView.layer.borderWidth = 1.0f;
 //        self.contentView.layer.borderColor = [[UIColor redColor] colorWithAlphaComponent:.25f].CGColor;
 //        self.backgroundImageView.layer.borderWidth = 2.0f;
-//        self.layer.borderWidth = 1.0f;
+        self.layer.borderWidth = 1.0f;
     }
     
     return self;
 }
 
+//- (void)setFrame:(CGRect)frame
+//{
+//    [super setFrame:frame];
+//    NSLog(@"setFramE:%@", NSStringFromCGRect(frame));
+//}
+
 - (void)layoutSubviews
 {
     [super layoutSubviews];
+//    NSLog(@"layoutSubviews");
     
     //
     if (!self.backgroundImageView.superview)
@@ -156,7 +163,11 @@
 
 - (CGPoint)_midPointForRect:(CGRect)rect popoverSize:(CGSize)popoverSize arrowDirection:(FWTPopoverArrowDirection)arrowDirections
 {
-    CGPoint midPoint = CGPointMake(CGRectGetMidX(rect), CGRectGetMidY(rect));
+    CGPoint midPoint = CGPointZero;
+    midPoint.x = CGRectGetWidth(rect) == 1.0f ? rect.origin.x : CGRectGetMidX(rect);
+    midPoint.y = CGRectGetHeight(rect) == 1.0f ? rect.origin.y : CGRectGetMidY(rect);
+    
+//    CGPointMake(CGRectGetMidX(rect), CGRectGetMidY(rect));
     
     if (self.arrow.direction & FWTPopoverArrowDirectionUp)
         midPoint.x -= (popoverSize.width * .5f + self.arrow.cornerOffset);
@@ -258,7 +269,7 @@
     frame.origin = midPoint;
     frame.size = currentSize;
     [self _adjustAndSetFrame:frame inSuperview:view];
-    
+        
     //
     self.backgroundImageView.image = [self.backgroundHelper resizableBackgroundImageForSize:currentSize edgeInsets:self.edgeInsets];
 
@@ -292,6 +303,14 @@
                                  if (_delegateHas.didPresent) [self.delegate popoverViewDidPresent:self];
             }];
     }
+}
+
+- (void)adjustPositionToRect:(CGRect)rect
+{
+    CGPoint p = [self _midPointForRect:rect popoverSize:self.bounds.size arrowDirection:self.arrow.direction];
+    CGRect frame = self.frame;
+    frame.origin = p;
+    self.frame = frame;
 }
 
 - (void)dismissPopoverAnimated:(BOOL)animated

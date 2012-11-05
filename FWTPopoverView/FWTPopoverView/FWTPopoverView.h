@@ -35,6 +35,9 @@
 - (void)presentFromRect:(CGRect)rect inView:(UIView *)view permittedArrowDirection:(FWTPopoverArrowDirection)arrowDirection animated:(BOOL)animated;
 
 //
+- (void)adjustPositionToRect:(CGRect)rect;
+
+//
 - (void)dismissPopoverAnimated:(BOOL)animated;
 
 @end
