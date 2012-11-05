@@ -36,6 +36,7 @@
 
 //
 - (void)adjustPositionToRect:(CGRect)rect;
+- (void)adjustPositionToRect:(CGRect)rect animated:(BOOL)animated;
 
 //
 - (void)dismissPopoverAnimated:(BOOL)animated;

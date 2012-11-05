@@ -317,14 +317,27 @@ struct FWTPopoverViewFrameAndArrowAdjustment
 
 - (void)adjustPositionToRect:(CGRect)rect
 {
-    CGPoint newOrigin = [self _midPointForRect:rect popoverSize:self.bounds.size arrowDirection:self.arrow.direction];
-    CGRect frame = self.frame;
-    frame.origin = newOrigin;
+    [self adjustPositionToRect:rect animated:NO];
+}
 
-    if (self.adjustPositionInSuperviewEnabled)
-        frame = [self _adjustmentForFrame:frame inSuperview:self.superview].frame;
+- (void)adjustPositionToRect:(CGRect)rect animated:(BOOL)animated
+{
+    __block typeof(self) myself = self;
+    void(^adjustPositionBlock)(void) = ^() {
+        CGPoint newOrigin = [myself _midPointForRect:rect popoverSize:myself.bounds.size arrowDirection:myself.arrow.direction];
+        CGRect frame = myself.frame;
+        frame.origin = newOrigin;
+        
+        if (myself.adjustPositionInSuperviewEnabled)
+            frame = [myself _adjustmentForFrame:frame inSuperview:myself.superview].frame;
+        
+        myself.frame = frame;
+    };
     
-    self.frame = frame;
+    if (animated)
+        [UIView animateWithDuration:.25f animations:adjustPositionBlock];
+    else
+        adjustPositionBlock();
 }
 
 - (void)dismissPopoverAnimated:(BOOL)animated
