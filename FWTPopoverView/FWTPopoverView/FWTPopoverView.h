@@ -18,7 +18,6 @@
 - (void)popoverViewDidDismiss:(FWTPopoverView *)annotationView;
 @end
 
-
 @interface FWTPopoverView : UIView
 
 @property (nonatomic, readonly, retain) UIView *contentView;

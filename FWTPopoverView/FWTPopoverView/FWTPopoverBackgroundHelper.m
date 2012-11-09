@@ -9,6 +9,16 @@
 #import "FWTPopoverBackgroundHelper.h"
 #import "FWTPopoverView.h"
 
+#define FWT_PBH_CORNER_RADIUS       6.0f
+#define FWT_PBH_FILL_COLOR          [[UIColor blackColor] colorWithAlphaComponent:.5f].CGColor
+#define FWT_PBH_STROKE_COLOR        [UIColor blackColor].CGColor
+#define FWT_PBH_LINE_WIDTH          1.0f
+#define FWT_PBH_LINE_JOIN           kCALineJoinRound
+#define FWT_PBH_SHADOW_RADIUS       5.0f
+#define FWT_PBH_SHADOW_OFFSET       CGSizeMake(.0f, 1.0f)
+#define FWT_PBH_SHADOW_COLOR        [[UIColor blackColor] colorWithAlphaComponent:.5f].CGColor
+#define FWT_PBH_SHADOW_OPACITY      1.0f
+
 enum {
     AxisTypeHorizontal = 0,
     AxisTypeVertical,
@@ -35,23 +45,21 @@ typedef NSUInteger AxisType;
         self.annotationView = annotationView;
         
         //
-        self.cornerRadius = 6.0f;
+        self.cornerRadius = FWT_PBH_CORNER_RADIUS;
         
         //
-        self.fillColor = [[UIColor blackColor] colorWithAlphaComponent:.5f].CGColor;
-        self.strokeColor = [UIColor blackColor].CGColor;
+        self.fillColor = FWT_PBH_FILL_COLOR;
+        self.strokeColor = FWT_PBH_STROKE_COLOR;
         
         //
-        self.lineWidth = 1.0f;
-        self.lineJoin = kCALineJoinRound;
+        self.lineWidth = FWT_PBH_LINE_WIDTH;
+        self.lineJoin = FWT_PBH_LINE_JOIN;
         
         //
-        self.shadowRadius = 5.0f;
-        self.shadowOffset = CGSizeMake(.0f, 1.0f);
-        self.shadowColor = [[UIColor blackColor] colorWithAlphaComponent:.5f].CGColor;
-        self.shadowOpacity = 1.0f;
-        
-//        self.borderWidth = 1.0f;
+        self.shadowRadius = FWT_PBH_SHADOW_RADIUS;
+        self.shadowOffset = FWT_PBH_SHADOW_OFFSET;
+        self.shadowColor = FWT_PBH_SHADOW_COLOR;
+        self.shadowOpacity = FWT_PBH_SHADOW_OPACITY;
     }
     
     return self;
@@ -79,9 +87,7 @@ typedef NSUInteger AxisType;
         contextSize.height = (self.cornerRadius * 2) + edgeInsets.top + edgeInsets.bottom + 1.0f;
         capInsets = UIEdgeInsetsMake(edgeInsets.top + self.cornerRadius, edgeInsets.left + self.cornerRadius, edgeInsets.bottom + self.cornerRadius, edgeInsets.right + self.cornerRadius);
     }
-    
-//    NSLog(@"contextSize:%@", NSStringFromCGSize(contextSize));
-    
+
     //
     CGRect rect = CGRectMake(.0f, .0f, contextSize.width, contextSize.height);
     self.pathFrame = UIEdgeInsetsInsetRect(rect, edgeInsets);
@@ -168,8 +174,6 @@ typedef NSUInteger AxisType;
 #pragma mark - Private
 - (UIImage *)_backgroundImageForSize:(CGSize)size
 {
-//    NSLog(@"_backgroundImageForSize:%@", NSStringFromCGSize(size));
-
     //
     self.frame = CGRectMake(.0f, .0f, size.width, size.height);
     

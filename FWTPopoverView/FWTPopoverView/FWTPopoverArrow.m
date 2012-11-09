@@ -8,8 +8,14 @@
 
 #import "FWTPopoverArrow.h"
 
+#define FWT_PA_DIRECTION        FWTPopoverArrowDirectionNone
+#define FWT_PA_SIZE             CGSizeMake(10.0f, 10.0f)
+#define FWT_PA_OFFSET           .0f
+#define FWT_PA_CORNER_OFFSET    .0f
+
 @interface FWTPopoverArrow ()
 @property (nonatomic, readwrite, assign) FWTPopoverArrowDirection direction;
+@property (nonatomic, readwrite, assign) CGFloat offset;
 @end
 
 @implementation FWTPopoverArrow
@@ -19,10 +25,10 @@
 {
     if ((self = [super init]))
     {
-        self.direction = FWTPopoverArrowDirectionNone;
-        self.size = CGSizeMake(10.0f, 10.0f);
-        self.offset = .0f;
-        self.cornerOffset = .0f;
+        self.direction = FWT_PA_DIRECTION;
+        self.size = FWT_PA_SIZE;
+        self.offset = FWT_PA_OFFSET;
+        self.cornerOffset = FWT_PA_CORNER_OFFSET;
     }
     return self;
 }

@@ -9,8 +9,13 @@
 #import "FWTPopoverView.h"
 #import <QuartzCore/QuartzCore.h>
 
+#define FWT_PV_SUGGESTED_EDGE_INSETS                    UIEdgeInsetsMake(10.0f, 10.0f, 10.0f, 10.0f)
+#define FWT_PV_CONTENT_SIZE                             CGSizeMake(160.0f, 60.0f)
+#define FWT_PV_ADJUST_POSITION_IN_SUPERVIEW_ENABLED     YES
+
 @interface FWTPopoverArrow ()
 @property (nonatomic, readwrite, assign) FWTPopoverArrowDirection direction;
+@property (nonatomic, readwrite, assign) CGFloat offset;
 @end
 
 struct FWTPopoverViewFrameAndArrowAdjustment
@@ -64,30 +69,23 @@ struct FWTPopoverViewFrameAndArrowAdjustment
     if ((self = [super initWithFrame:frame]))
     {        
         //
-        self.suggestedEdgeInsets = UIEdgeInsetsMake(10.0f, 10.0f, 10.0f, 10.0f);
-        self.contentSize = CGSizeMake(160.0f, 60.0f);
-        self.adjustPositionInSuperviewEnabled = YES;
+        self.suggestedEdgeInsets = FWT_PV_SUGGESTED_EDGE_INSETS;
+        self.contentSize = FWT_PV_CONTENT_SIZE;
+        self.adjustPositionInSuperviewEnabled = FWT_PV_ADJUST_POSITION_IN_SUPERVIEW_ENABLED;
         
         //  debug
 //        self.contentView.layer.borderWidth = 1.0f;
 //        self.contentView.layer.borderColor = [[UIColor redColor] colorWithAlphaComponent:.25f].CGColor;
 //        self.backgroundImageView.layer.borderWidth = 2.0f;
-        self.layer.borderWidth = 1.0f;
+//        self.layer.borderWidth = 1.0f;
     }
     
     return self;
 }
 
-//- (void)setFrame:(CGRect)frame
-//{
-//    [super setFrame:frame];
-//    NSLog(@"setFramE:%@", NSStringFromCGRect(frame));
-//}
-
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-//    NSLog(@"layoutSubviews");
     
     //
     if (!self.backgroundImageView.superview)
@@ -173,8 +171,6 @@ struct FWTPopoverViewFrameAndArrowAdjustment
     CGPoint midPoint = CGPointZero;
     midPoint.x = CGRectGetWidth(rect) == 1.0f ? rect.origin.x : CGRectGetMidX(rect);
     midPoint.y = CGRectGetHeight(rect) == 1.0f ? rect.origin.y : CGRectGetMidY(rect);
-    
-//    CGPointMake(CGRectGetMidX(rect), CGRectGetMidY(rect));
     
     if (self.arrow.direction & FWTPopoverArrowDirectionUp)
         midPoint.x -= (popoverSize.width * .5f + self.arrow.cornerOffset);
@@ -277,7 +273,6 @@ struct FWTPopoverViewFrameAndArrowAdjustment
         self.frame = adj.frame;
         self.arrow.offset = [self _arrowOffsetForDeltaX:adj.dx deltaY:adj.dy direction:adj.direction];
     }
-    
     
     //
     self.backgroundImageView.image = [self.backgroundHelper resizableBackgroundImageForSize:currentSize edgeInsets:self.edgeInsets];
