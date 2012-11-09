@@ -20,7 +20,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
-    self.window.backgroundColor = [UIColor colorWithWhite:.9f alpha:1.0f];
+    self.window.backgroundColor = [UIColor scrollViewTexturedBackgroundColor];
     UIViewController *vc = [[[ViewController alloc] init] autorelease];
     self.window.rootViewController = [[[UINavigationController alloc] initWithRootViewController:vc] autorelease];
     [self.window makeKeyAndVisible];

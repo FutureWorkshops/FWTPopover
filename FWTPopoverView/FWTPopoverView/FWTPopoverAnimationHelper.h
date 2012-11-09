@@ -16,7 +16,7 @@ typedef void (^FWTAnnotationAnimationCompletionBlock)(BOOL finished);
 @interface FWTPopoverAnimationHelper : NSObject
 
 @property (nonatomic, readonly, assign) FWTPopoverView *annotationView;
-@property (nonatomic, assign) CGFloat presentDuration, dismissDuration;
+@property (nonatomic, assign) CGFloat presentDuration, dismissDuration, adjustPositionDuration;
 @property (nonatomic, assign) CGFloat presentDelay, dismissDelay;
 @property (nonatomic, assign) UIViewAnimationOptions presentOptions, dismissOptions;
 @property (nonatomic, copy) FWTAnnotationAnimationPrepareBlock prepareBlock;

@@ -9,9 +9,22 @@
 #import "FWTPopoverView.h"
 #import <QuartzCore/QuartzCore.h>
 
+#define FWT_PV_SUGGESTED_EDGE_INSETS                    UIEdgeInsetsMake(10.0f, 10.0f, 10.0f, 10.0f)
+#define FWT_PV_CONTENT_SIZE                             CGSizeMake(160.0f, 60.0f)
+#define FWT_PV_ADJUST_POSITION_IN_SUPERVIEW_ENABLED     YES
+
 @interface FWTPopoverArrow ()
 @property (nonatomic, readwrite, assign) FWTPopoverArrowDirection direction;
+@property (nonatomic, readwrite, assign) CGFloat offset;
 @end
+
+struct FWTPopoverViewFrameAndArrowAdjustment
+{
+    CGRect frame;
+    CGFloat dx;
+    CGFloat dy;
+    NSInteger direction;
+};
 
 @interface FWTPopoverView ()
 {
@@ -29,7 +42,6 @@
 //  Private
 - (CGFloat)_arrowOffsetForDeltaX:(CGFloat)dX deltaY:(CGFloat)dY direction:(NSInteger)direction;
 - (CGPoint)_midPointForRect:(CGRect)rect popoverSize:(CGSize)popoverSize arrowDirection:(FWTPopoverArrowDirection)arrowDirections;
-- (void)_adjustAndSetFrame:(CGRect)frame inSuperview:(UIView *)view;
 
 @end
 
@@ -57,9 +69,9 @@
     if ((self = [super initWithFrame:frame]))
     {        
         //
-        self.suggestedEdgeInsets = UIEdgeInsetsMake(10.0f, 10.0f, 10.0f, 10.0f);
-        self.contentSize = CGSizeMake(160.0f, 60.0f);
-        self.adjustPositionInSuperviewEnabled = YES;
+        self.suggestedEdgeInsets = FWT_PV_SUGGESTED_EDGE_INSETS;
+        self.contentSize = FWT_PV_CONTENT_SIZE;
+        self.adjustPositionInSuperviewEnabled = FWT_PV_ADJUST_POSITION_IN_SUPERVIEW_ENABLED;
         
         //  debug
 //        self.contentView.layer.borderWidth = 1.0f;
@@ -156,7 +168,9 @@
 
 - (CGPoint)_midPointForRect:(CGRect)rect popoverSize:(CGSize)popoverSize arrowDirection:(FWTPopoverArrowDirection)arrowDirections
 {
-    CGPoint midPoint = CGPointMake(CGRectGetMidX(rect), CGRectGetMidY(rect));
+    CGPoint midPoint = CGPointZero;
+    midPoint.x = CGRectGetWidth(rect) == 1.0f ? rect.origin.x : CGRectGetMidX(rect);
+    midPoint.y = CGRectGetHeight(rect) == 1.0f ? rect.origin.y : CGRectGetMidY(rect);
     
     if (self.arrow.direction & FWTPopoverArrowDirectionUp)
         midPoint.x -= (popoverSize.width * .5f + self.arrow.cornerOffset);
@@ -185,47 +199,41 @@
     return midPoint;
 }
 
-- (void)_adjustAndSetFrame:(CGRect)frame inSuperview:(UIView *)view
+- (struct FWTPopoverViewFrameAndArrowAdjustment)_adjustmentForFrame:(CGRect)frame inSuperview:(UIView *)view
 {
-    CGFloat dX = .0f;
-    CGFloat dY = .0f;
-    NSInteger direction = 1;
-    if (self.adjustPositionInSuperviewEnabled)
+    struct FWTPopoverViewFrameAndArrowAdjustment toReturn;
+    toReturn.frame = frame;
+    toReturn.dx = .0f;
+    toReturn.dy = .0f;
+    toReturn.direction = 1;
+    
+    CGRect intersection = CGRectIntersection(view.bounds, toReturn.frame);    
+    CGFloat frameWidth = toReturn.frame.size.width;
+    CGFloat frameHeight = toReturn.frame.size.height;
+    if (intersection.size.width != frameWidth)
     {
-        CGRect intersection = CGRectIntersection(view.bounds, frame);
-
-        CGFloat frameWidth = frame.size.width;
-        CGFloat frameHeight = frame.size.height;
-        if (intersection.size.width != frameWidth)
+        toReturn.dx = frameWidth-intersection.size.width;
+        if (intersection.origin.x == 0)
         {
-            dX = frameWidth-intersection.size.width;
-            if (intersection.origin.x == 0)
-            {
-                frame = CGRectOffset(frame, dX, .0f);
-                direction = -1;
-            }
-            else
-                frame = CGRectOffset(frame, -dX, .0f);
+            toReturn.frame = CGRectOffset(toReturn.frame, toReturn.dx, .0f);
+            toReturn.direction = -1;
         }
-        if (intersection.size.height != frameHeight)
+        else
+            toReturn.frame = CGRectOffset(toReturn.frame, -toReturn.dx, .0f);
+    }
+    if (intersection.size.height != frameHeight)
+    {
+        toReturn.dy = frameHeight-intersection.size.height;
+        if (intersection.origin.y == 0)
         {
-            dY = frameHeight-intersection.size.height;
-            if (intersection.origin.y == 0)
-            {
-                frame = CGRectOffset(frame, .0f, dY);
-                direction = -1;
-            }
-            else
-                frame = CGRectOffset(frame, .0f, -dY);
+            toReturn.frame = CGRectOffset(toReturn.frame, .0f, toReturn.dy);
+            toReturn.direction = -1;
         }
+        else
+            toReturn.frame = CGRectOffset(toReturn.frame, .0f, -toReturn.dy);
     }
     
-    //
-    self.frame = CGRectIntegral(frame);
-    
-    //
-    if (self.adjustPositionInSuperviewEnabled)
-        self.arrow.offset = [self _arrowOffsetForDeltaX:dX deltaY:dY direction:direction];
+    return toReturn;
 }
 
 #pragma mark - Public
@@ -253,11 +261,18 @@
     currentSize.height += self.edgeInsets.top + self.edgeInsets.bottom;
     
     //
-    CGPoint midPoint = [self _midPointForRect:rect popoverSize:currentSize arrowDirection:self.arrow.direction];
+    CGPoint newOrigin = [self _midPointForRect:rect popoverSize:currentSize arrowDirection:self.arrow.direction];
     CGRect frame = CGRectZero;
-    frame.origin = midPoint;
+    frame.origin = newOrigin;
     frame.size = currentSize;
-    [self _adjustAndSetFrame:frame inSuperview:view];
+    frame = CGRectIntegral(frame);
+    self.frame = frame;
+    if (self.adjustPositionInSuperviewEnabled)
+    {
+        struct FWTPopoverViewFrameAndArrowAdjustment adj = [self _adjustmentForFrame:frame inSuperview:view];
+        self.frame = adj.frame;
+        self.arrow.offset = [self _arrowOffsetForDeltaX:adj.dx deltaY:adj.dy direction:adj.direction];
+    }
     
     //
     self.backgroundImageView.image = [self.backgroundHelper resizableBackgroundImageForSize:currentSize edgeInsets:self.edgeInsets];
@@ -292,6 +307,31 @@
                                  if (_delegateHas.didPresent) [self.delegate popoverViewDidPresent:self];
             }];
     }
+}
+
+- (void)adjustPositionToRect:(CGRect)rect
+{
+    [self adjustPositionToRect:rect animated:NO];
+}
+
+- (void)adjustPositionToRect:(CGRect)rect animated:(BOOL)animated
+{
+    __block typeof(self) myself = self;
+    void(^adjustPositionBlock)(void) = ^() {
+        CGPoint newOrigin = [myself _midPointForRect:rect popoverSize:myself.bounds.size arrowDirection:myself.arrow.direction];
+        CGRect frame = myself.frame;
+        frame.origin = newOrigin;
+        
+        if (myself.adjustPositionInSuperviewEnabled)
+            frame = [myself _adjustmentForFrame:frame inSuperview:myself.superview].frame;
+        
+        myself.frame = frame;
+    };
+    
+    if (animated)
+        [UIView animateWithDuration:self.animationHelper.adjustPositionDuration animations:adjustPositionBlock];
+    else
+        adjustPositionBlock();
 }
 
 - (void)dismissPopoverAnimated:(BOOL)animated
