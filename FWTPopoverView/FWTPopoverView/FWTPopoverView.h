@@ -40,4 +40,7 @@
 //
 - (void)dismissPopoverAnimated:(BOOL)animated;
 
+//
+- (CGRect)arrowRect;
+
 @end

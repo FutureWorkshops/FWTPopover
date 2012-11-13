@@ -76,7 +76,7 @@ struct FWTPopoverViewFrameAndArrowAdjustment
         //  debug
 //        self.contentView.layer.borderWidth = 1.0f;
 //        self.contentView.layer.borderColor = [[UIColor redColor] colorWithAlphaComponent:.25f].CGColor;
-//        self.backgroundImageView.layer.borderWidth = 2.0f;
+//        self.backgroundImageView.layer.borderWidth = 1.0f;
 //        self.layer.borderWidth = 1.0f;
     }
     
@@ -355,6 +355,39 @@ struct FWTPopoverViewFrameAndArrowAdjustment
         
         if (_delegateHas.didDismiss) [self.delegate popoverViewDidDismiss:self];
     }
+}
+
+- (CGRect)arrowRect
+{
+    CGRect toReturn = self.frame;
+    toReturn.size = self.arrow.size;
+    
+    if (self.arrow.direction & FWTPopoverArrowDirectionUp)
+    {
+        toReturn.origin.x += (CGRectGetWidth(self.frame)-self.arrow.size.width)*.5f + self.arrow.offset;
+        toReturn.origin.y += self.edgeInsets.top-self.arrow.size.height;
+    }
+    else if (self.arrow.direction & FWTPopoverArrowDirectionDown)
+    {
+        toReturn.origin.x += (CGRectGetWidth(self.frame)-self.arrow.size.width)*.5f + self.arrow.offset;
+        toReturn.origin.y += (CGRectGetHeight(self.frame)-self.edgeInsets.bottom);
+    }
+    else if (self.arrow.direction & FWTPopoverArrowDirectionLeft)
+    {
+        toReturn.origin.y += (CGRectGetHeight(self.frame)-self.arrow.size.width)*.5f + self.arrow.offset;
+        toReturn.origin.x += self.edgeInsets.left-self.arrow.size.width;
+    }
+    else if (self.arrow.direction & FWTPopoverArrowDirectionRight)
+    {
+        toReturn.origin.y += (CGRectGetHeight(self.frame)-self.arrow.size.width)*.5f + self.arrow.offset;
+        toReturn.origin.x += (CGRectGetWidth(self.frame)-self.edgeInsets.right);
+    }
+    else if (self.arrow.direction & FWTPopoverArrowDirectionNone)
+    {
+        toReturn = CGRectZero;
+    }
+    
+    return toReturn;
 }
 
 @end
