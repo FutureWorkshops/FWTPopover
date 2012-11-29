@@ -32,10 +32,6 @@ struct FWTPopoverViewFrameAndArrowAdjustment
 @property (nonatomic, readwrite, retain) UIView *contentView;
 @property (nonatomic, assign) UIEdgeInsets suggestedEdgeInsets, edgeInsets;
 
-//  Private
-- (CGFloat)_arrowOffsetForDeltaX:(CGFloat)dX deltaY:(CGFloat)dY direction:(NSInteger)direction;
-- (CGPoint)_midPointForRect:(CGRect)rect popoverSize:(CGSize)popoverSize arrowDirection:(FWTPopoverArrowDirection)arrowDirections;
-
 @end
 
 @implementation FWTPopoverView
