@@ -10,13 +10,7 @@
 #import "FWTPopoverView.h"
 
 @interface ViewController ()
-{
-    UIView *_touchPointView;
-    UISegmentedControl *_segmentedControl;
-    FWTPopoverArrowDirection _popoverArrowDirection;
-    BOOL _manyPopoversEnabled;
-}
-
+@property (nonatomic, retain) FWTPopoverView *popoverView;
 @property (nonatomic, retain) UIView *touchPointView;
 @property (nonatomic, retain) UISegmentedControl *segmentedControl;
 @property (nonatomic, assign) FWTPopoverArrowDirection popoverArrowDirection;
@@ -42,7 +36,6 @@
         UISwitch *manyPopoversSwitch = [[[UISwitch alloc] init] autorelease];
         [manyPopoversSwitch addTarget:self action:@selector(_manyPopoverSwitchValueChanged:) forControlEvents:UIControlEventValueChanged];
         self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithCustomView:manyPopoversSwitch] autorelease];
-        
         self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash
                                                                                                 target:self
                                                                                                 action:@selector(_didPressRightBarButton:)] autorelease];
@@ -56,11 +49,10 @@
     [super loadView];
     
     //
-    self.popoverArrowDirection = pow(2, 0);
-    
-    //
+    self.view.backgroundColor = [UIColor colorWithWhite:.91f alpha:.35f];
     self.navigationItem.titleView = self.segmentedControl;
-    self.segmentedControl.selectedSegmentIndex = 0;
+    self.popoverArrowDirection = pow(2, 0);
+    self.segmentedControl.selectedSegmentIndex = log2(self.popoverArrowDirection);
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
@@ -87,8 +79,10 @@
 {
     if (!self->_touchPointView)
     {
-        self->_touchPointView = [[UIView alloc] initWithFrame:CGRectMake(.0f, .0f, 3.0f, 3.0f)];
+        self->_touchPointView = [[UIView alloc] initWithFrame:CGRectMake(.0f, .0f, 4.0f, 4.0f)];
+        self->_touchPointView.backgroundColor = [[UIColor redColor] colorWithAlphaComponent:.5f];
         self->_touchPointView.layer.borderWidth = 1.0f;
+        self->_touchPointView.layer.cornerRadius = 2.0f;
     }
     
     return self->_touchPointView;
@@ -136,47 +130,38 @@
 #pragma mark - UIResponder
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    //
     CGPoint point = [[touches anyObject] locationInView:self.view];
-    if (!self.touchPointView.superview)
-        [self.view addSubview:self.touchPointView];
+
+    //
+    if (!self.popoverView || self.manyPopoversEnabled)
+    {
+        self.popoverView = [[[FWTPopoverView alloc] init] autorelease];
+        __block typeof(self) myself = self;
+        self.popoverView.didDismissBlock = ^(FWTPopoverView *av){ myself.popoverView = nil; };
+        CGColorRef fillColor = self.manyPopoversEnabled ? [self _pleaseGiveMeARandomColor].CGColor : self.popoverView.backgroundHelper.fillColor;
+        self.popoverView.backgroundHelper.fillColor = fillColor;
+        [self.popoverView presentFromRect:CGRectMake(point.x, point.y, 1.0f, 1.0f)
+                                   inView:self.view
+                  permittedArrowDirection:self.popoverArrowDirection
+                                 animated:YES];
+    }
+    else if (!self.manyPopoversEnabled)
+        [self.popoverView dismissPopoverAnimated:YES];
     
+    
+    //
+    if (!self.touchPointView.superview) [self.view addSubview:self.touchPointView];
     self.touchPointView.center = point;
-    
-    //
-    FWTPopoverView *popoverView = (FWTPopoverView *)[self.view viewWithTag:0xbeef];
-    if (!popoverView)
-    {
-        popoverView = [[[FWTPopoverView alloc] init] autorelease];
-        popoverView.tag = self.manyPopoversEnabled ? 0 : 0xbeef;
-        popoverView.backgroundHelper.fillColor = self.manyPopoversEnabled ? [self _pleaseGiveMeARandomColor].CGColor : popoverView.backgroundHelper.fillColor;
-        popoverView.backgroundHelper.strokeColor = self.manyPopoversEnabled ? [self _pleaseGiveMeARandomColor].CGColor : popoverView.backgroundHelper.strokeColor;
-        [popoverView presentFromRect:self.touchPointView.frame
-                              inView:self.view
-             permittedArrowDirection:self.popoverArrowDirection
-                            animated:YES];
-    }
-    else
-    {
-        [popoverView dismissPopoverAnimated:YES];
-    }
-    
-    
-    //
     [self.view bringSubviewToFront:self.touchPointView];
 }
 
 #pragma mark - Private
 - (UIColor *)_pleaseGiveMeARandomColor
 {
-    static CGFloat saturation = 0.6, brightness = 0.7;
-    
-    //  debug
     NSInteger countOfItems = 200;
-    NSInteger random = arc4random()%200;
-    UIColor *color = [UIColor colorWithHue:(CGFloat)random/countOfItems
-                                saturation:saturation
-                                brightness:brightness
-                                     alpha:.5f];
+    NSInteger random = arc4random()%countOfItems;
+    UIColor *color = [UIColor colorWithHue:(CGFloat)random/countOfItems saturation:.6f brightness:.7f alpha:.5f];
     return color;
 }
 

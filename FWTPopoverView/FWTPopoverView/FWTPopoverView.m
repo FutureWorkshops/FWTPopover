@@ -27,13 +27,6 @@ struct FWTPopoverViewFrameAndArrowAdjustment
 };
 
 @interface FWTPopoverView ()
-{
-    struct
-    {
-        BOOL didPresent: 1;
-        BOOL didDismiss: 1;
-    } _delegateHas;
-}
 
 @property (nonatomic, retain)  UIImageView *backgroundImageView;
 @property (nonatomic, readwrite, retain) UIView *contentView;
@@ -48,14 +41,12 @@ struct FWTPopoverViewFrameAndArrowAdjustment
 @implementation FWTPopoverView
 @synthesize backgroundImageView = _backgroundImageView;
 @synthesize contentView = _contentView;
-@synthesize delegate = _delegate;
 @synthesize arrow = _arrow;
 @synthesize backgroundHelper = _backgroundHelper;
 @synthesize animationHelper = _animationHelper;
 
 - (void)dealloc
 {
-    self.delegate = nil;
     self.arrow = nil;
     self.backgroundHelper = nil;
     self.animationHelper = nil;
@@ -72,12 +63,6 @@ struct FWTPopoverViewFrameAndArrowAdjustment
         self.suggestedEdgeInsets = FWT_PV_SUGGESTED_EDGE_INSETS;
         self.contentSize = FWT_PV_CONTENT_SIZE;
         self.adjustPositionInSuperviewEnabled = FWT_PV_ADJUST_POSITION_IN_SUPERVIEW_ENABLED;
-        
-        //  debug
-//        self.contentView.layer.borderWidth = 1.0f;
-//        self.contentView.layer.borderColor = [[UIColor redColor] colorWithAlphaComponent:.25f].CGColor;
-//        self.backgroundImageView.layer.borderWidth = 1.0f;
-//        self.layer.borderWidth = 1.0f;
     }
     
     return self;
@@ -88,56 +73,42 @@ struct FWTPopoverViewFrameAndArrowAdjustment
     [super layoutSubviews];
     
     //
-    if (!self.backgroundImageView.superview)
-        [self addSubview:self.backgroundImageView];
-
+    if (!self.backgroundImageView.superview) [self addSubview:self.backgroundImageView];
     self.backgroundImageView.frame = self.bounds;
     
     //
-    if (!self.contentView.superview)
-        [self addSubview:self.contentView];
-    
+    if (!self.contentView.superview) [self addSubview:self.contentView]; 
     self.contentView.frame = UIEdgeInsetsInsetRect(self.bounds, self.edgeInsets);
 }
 
 #pragma mark - Getters
 - (UIImageView *)backgroundImageView
 {
-    if (!self->_backgroundImageView)
-        self->_backgroundImageView = [[UIImageView alloc] init];
-    
+    if (!self->_backgroundImageView) self->_backgroundImageView = [[UIImageView alloc] init];
     return self->_backgroundImageView;
 }
 
 - (UIView *)contentView
 {
-    if (!self->_contentView)
-        self->_contentView = [[UIView alloc] init];
-    
+    if (!self->_contentView) self->_contentView = [[UIView alloc] init];
     return self->_contentView;
 }
 
 - (FWTPopoverBackgroundHelper *)backgroundHelper
 {
-    if (!self->_backgroundHelper)
-        self->_backgroundHelper = [[FWTPopoverBackgroundHelper alloc] initWithAnnotationView:self];
-    
+    if (!self->_backgroundHelper) self->_backgroundHelper = [[FWTPopoverBackgroundHelper alloc] initWithAnnotationView:self];
     return self->_backgroundHelper;
 }
 
 - (FWTPopoverArrow *)arrow
 {
-    if (!self->_arrow)
-        self->_arrow = [[FWTPopoverArrow alloc] init];
-    
+    if (!self->_arrow) self->_arrow = [[FWTPopoverArrow alloc] init];
     return self->_arrow;
 }
 
 - (FWTPopoverAnimationHelper *)animationHelper
 {
-    if (!self->_animationHelper)
-        self->_animationHelper = [[FWTPopoverAnimationHelper alloc] initWithAnnotationView:self];
-    
+    if (!self->_animationHelper) self->_animationHelper = [[FWTPopoverAnimationHelper alloc] initWithAnnotationView:self];
     return self->_animationHelper;
 }
 
@@ -237,16 +208,6 @@ struct FWTPopoverViewFrameAndArrowAdjustment
 }
 
 #pragma mark - Public
-- (void)setDelegate:(id<FWTPopoverViewDelegate>)delegate
-{
-    if (self->_delegate != delegate)
-    {
-        self->_delegate = delegate;
-        _delegateHas.didPresent = [self->_delegate respondsToSelector:@selector(popoverViewDidPresent:)];
-        _delegateHas.didDismiss = [self->_delegate respondsToSelector:@selector(popoverViewDidDismiss:)];
-    }
-}
-
 - (void)presentFromRect:(CGRect)rect inView:(UIView *)view permittedArrowDirection:(FWTPopoverArrowDirection)arrowDirection animated:(BOOL)animated
 {
     //
@@ -282,7 +243,7 @@ struct FWTPopoverViewFrameAndArrowAdjustment
     {
         [view addSubview:self];
         
-        if (_delegateHas.didPresent) [self.delegate popoverViewDidPresent:self];
+        if (self.didPresentBlock) self.didPresentBlock(self);
     }
     else
     {
@@ -300,11 +261,9 @@ struct FWTPopoverViewFrameAndArrowAdjustment
                              animations:self.animationHelper.presentAnimationsBlock
                              completion:^(BOOL finished) {
 
-                                 //
                                  [self.animationHelper safePerformCompletionBlock:self.animationHelper.presentCompletionBlock finished:finished];
                                  
-                                 //
-                                 if (_delegateHas.didPresent) [self.delegate popoverViewDidPresent:self];
+                                 if (self.didPresentBlock) self.didPresentBlock(self);
             }];
     }
 }
@@ -347,13 +306,13 @@ struct FWTPopoverViewFrameAndArrowAdjustment
                              
                              [self removeFromSuperview];
                              
-                             if (_delegateHas.didDismiss) [self.delegate popoverViewDidDismiss:self];
+                             if (self.didDismissBlock) self.didDismissBlock(self);
                          }];
     else
     {
         [self removeFromSuperview];
         
-        if (_delegateHas.didDismiss) [self.delegate popoverViewDidDismiss:self];
+        if (self.didDismissBlock) self.didDismissBlock(self);
     }
 }
 

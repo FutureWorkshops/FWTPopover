@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-typedef NS_ENUM(NSInteger, FWTPopoverArrowDirection) {
+typedef NS_OPTIONS(NSUInteger, FWTPopoverArrowDirection) {
     FWTPopoverArrowDirectionNone = 1UL << 0,
     FWTPopoverArrowDirectionUp = 1UL << 1,
     FWTPopoverArrowDirectionDown = 1UL << 2,

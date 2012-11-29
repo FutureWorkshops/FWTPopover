@@ -16,8 +16,8 @@
 #define FWT_PBH_LINE_JOIN           kCALineJoinRound
 #define FWT_PBH_SHADOW_RADIUS       5.0f
 #define FWT_PBH_SHADOW_OFFSET       CGSizeMake(.0f, 1.0f)
-#define FWT_PBH_SHADOW_COLOR        [[UIColor blackColor] colorWithAlphaComponent:.5f].CGColor
-#define FWT_PBH_SHADOW_OPACITY      1.0f
+#define FWT_PBH_SHADOW_COLOR        [UIColor blackColor].CGColor
+#define FWT_PBH_SHADOW_OPACITY      .7f
 
 enum {
     AxisTypeHorizontal = 0,
@@ -68,24 +68,25 @@ typedef NSUInteger AxisType;
 - (UIImage *)resizableBackgroundImageForSize:(CGSize)size edgeInsets:(UIEdgeInsets)edgeInsets
 {
     //
+    CGFloat radius = self.cornerRadius;
     FWTPopoverArrowDirection arrowDirection = self.annotationView.arrow.direction;
     UIEdgeInsets capInsets = UIEdgeInsetsZero;
     CGSize contextSize = size;
     if (arrowDirection & FWTPopoverArrowDirectionUp || arrowDirection & FWTPopoverArrowDirectionDown)
     {
-        contextSize.height = (self.cornerRadius * 2) + edgeInsets.top + edgeInsets.bottom + 1.0f;
-        capInsets = UIEdgeInsetsMake(edgeInsets.top + self.cornerRadius, .0f, edgeInsets.bottom + self.cornerRadius, .0f);
+        contextSize.height = (radius * 2) + edgeInsets.top + edgeInsets.bottom + 1.0f;
+        capInsets = UIEdgeInsetsMake(edgeInsets.top + radius, .0f, edgeInsets.bottom + radius, .0f);
     }
     else if (arrowDirection & FWTPopoverArrowDirectionLeft || arrowDirection & FWTPopoverArrowDirectionRight)
     {
-        contextSize.width = (self.cornerRadius * 2) + edgeInsets.left + edgeInsets.right + 1.0f;
-        capInsets = UIEdgeInsetsMake(.0f, edgeInsets.left + self.cornerRadius, .0f, edgeInsets.right + self.cornerRadius);
+        contextSize.width = (radius * 2) + edgeInsets.left + edgeInsets.right + 1.0f;
+        capInsets = UIEdgeInsetsMake(.0f, edgeInsets.left + radius, .0f, edgeInsets.right + radius);
     }
     else if (arrowDirection & FWTPopoverArrowDirectionNone)
     {
-        contextSize.width = (self.cornerRadius * 2) + edgeInsets.left + edgeInsets.right + 1.0f;
-        contextSize.height = (self.cornerRadius * 2) + edgeInsets.top + edgeInsets.bottom + 1.0f;
-        capInsets = UIEdgeInsetsMake(edgeInsets.top + self.cornerRadius, edgeInsets.left + self.cornerRadius, edgeInsets.bottom + self.cornerRadius, edgeInsets.right + self.cornerRadius);
+        contextSize.width = (radius * 2) + edgeInsets.left + edgeInsets.right + 1.0f;
+        contextSize.height = (radius * 2) + edgeInsets.top + edgeInsets.bottom + 1.0f;
+        capInsets = UIEdgeInsetsMake(edgeInsets.top + radius, edgeInsets.left + radius, edgeInsets.bottom + radius, edgeInsets.right + radius);
     }
 
     //
@@ -152,22 +153,17 @@ typedef NSUInteger AxisType;
     UIBezierPath *bp = [UIBezierPath bezierPath];
     [bp moveToPoint:a];
     [bp addQuadCurveToPoint:b controlPoint:ab];
-    if (arrowDirection == FWTPopoverArrowDirectionUp)
-        AppendArrowBlock(bp, b, 1, AxisTypeHorizontal);
+    if (arrowDirection == FWTPopoverArrowDirectionUp) AppendArrowBlock(bp, b, 1, AxisTypeHorizontal);
     [bp addLineToPoint:c];
     [bp addQuadCurveToPoint:d controlPoint:cd];
-    if (arrowDirection == FWTPopoverArrowDirectionRight)
-        AppendArrowBlock(bp, d, 1, AxisTypeVertical);
+    if (arrowDirection == FWTPopoverArrowDirectionRight) AppendArrowBlock(bp, d, 1, AxisTypeVertical);
     [bp addLineToPoint:e];
     [bp addQuadCurveToPoint:f controlPoint:ef];
-    if (arrowDirection == FWTPopoverArrowDirectionDown)
-        AppendArrowBlock(bp, f, -1, AxisTypeHorizontal);
+    if (arrowDirection == FWTPopoverArrowDirectionDown) AppendArrowBlock(bp, f, -1, AxisTypeHorizontal);
     [bp addLineToPoint:g];
     [bp addQuadCurveToPoint:h controlPoint:gh];
-    if (arrowDirection == FWTPopoverArrowDirectionLeft)
-        AppendArrowBlock(bp, h, -1, AxisTypeVertical);
+    if (arrowDirection == FWTPopoverArrowDirectionLeft) AppendArrowBlock(bp, h, -1, AxisTypeVertical);
     [bp closePath];
-    
     return bp;
 }
 
@@ -205,8 +201,7 @@ typedef NSUInteger AxisType;
     [self renderInContext:ctx];
     
     //  give a chanche to do some extra stuff
-    if (self.drawPathBlock)
-        self.drawPathBlock(ctx, self);
+    if (self.drawPathBlock) self.drawPathBlock(self, ctx);
     
     //  render the border
     self.lineWidth = savedLineWidth;
@@ -217,10 +212,8 @@ typedef NSUInteger AxisType;
     self.fillColor = savedFillColorRef;
     self.shadowOpacity = savedShadowOpacity;
     
-    //
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
-    
     return image;
 }
 
