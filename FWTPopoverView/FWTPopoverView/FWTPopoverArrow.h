@@ -20,7 +20,7 @@ typedef NS_ENUM(NSInteger, FWTPopoverArrowDirection) {
 
 @property (nonatomic, readonly, assign) FWTPopoverArrowDirection direction;
 @property (nonatomic, assign) CGSize size;
-@property (nonatomic, assign) CGFloat offset;
+@property (nonatomic, readonly, assign) CGFloat offset;
 @property (nonatomic, assign) CGFloat cornerOffset;
 
 - (UIEdgeInsets)adjustedEdgeInsetsForEdgeInsets:(UIEdgeInsets)edgeInsets;

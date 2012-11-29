@@ -18,7 +18,6 @@
 - (void)popoverViewDidDismiss:(FWTPopoverView *)annotationView;
 @end
 
-
 @interface FWTPopoverView : UIView
 
 @property (nonatomic, readonly, retain) UIView *contentView;
@@ -33,6 +32,10 @@
 
 //
 - (void)presentFromRect:(CGRect)rect inView:(UIView *)view permittedArrowDirection:(FWTPopoverArrowDirection)arrowDirection animated:(BOOL)animated;
+
+//
+- (void)adjustPositionToRect:(CGRect)rect;
+- (void)adjustPositionToRect:(CGRect)rect animated:(BOOL)animated;
 
 //
 - (void)dismissPopoverAnimated:(BOOL)animated;
