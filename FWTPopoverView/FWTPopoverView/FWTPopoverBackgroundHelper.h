@@ -11,7 +11,7 @@
 
 @class FWTPopoverView, FWTPopoverBackgroundHelper;
 
-typedef void (^FWTAnnotationViewDrawBezierPathBlock)(CGContextRef, FWTPopoverBackgroundHelper *);
+typedef void (^FWTAnnotationViewDrawBezierPathBlock)(FWTPopoverBackgroundHelper *, CGContextRef);
 
 @interface FWTPopoverBackgroundHelper : CAShapeLayer
 
