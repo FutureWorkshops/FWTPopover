@@ -47,7 +47,6 @@ struct FWTPopoverViewFrameAndArrowAdjustment
 
 - (void)dealloc
 {
-    self.delegate = nil;
     self.arrow = nil;
     self.backgroundHelper = nil;
     self.animationHelper = nil;

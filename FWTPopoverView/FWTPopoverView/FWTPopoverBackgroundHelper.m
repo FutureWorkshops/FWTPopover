@@ -16,8 +16,8 @@
 #define FWT_PBH_LINE_JOIN           kCALineJoinRound
 #define FWT_PBH_SHADOW_RADIUS       5.0f
 #define FWT_PBH_SHADOW_OFFSET       CGSizeMake(.0f, 1.0f)
-#define FWT_PBH_SHADOW_COLOR        [[UIColor blackColor] colorWithAlphaComponent:.5f].CGColor
-#define FWT_PBH_SHADOW_OPACITY      1.0f
+#define FWT_PBH_SHADOW_COLOR        [UIColor blackColor].CGColor
+#define FWT_PBH_SHADOW_OPACITY      .7f
 
 enum {
     AxisTypeHorizontal = 0,
