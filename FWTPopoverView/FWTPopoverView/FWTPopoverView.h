@@ -12,11 +12,8 @@
 #import "FWTPopoverAnimationHelper.h"
 
 @class FWTPopoverView;
-@protocol FWTPopoverViewDelegate <NSObject>
-@optional
-- (void)popoverViewDidPresent:(FWTPopoverView *)annotationView;
-- (void)popoverViewDidDismiss:(FWTPopoverView *)annotationView;
-@end
+typedef void (^FWTPopoverViewDidPresentBlock)(FWTPopoverView *);
+typedef void (^FWTPopoverViewDidDismissBlock)(FWTPopoverView *);
 
 @interface FWTPopoverView : UIView
 
@@ -28,7 +25,8 @@
 @property (nonatomic, retain) FWTPopoverArrow *arrow;
 @property (nonatomic, retain) FWTPopoverAnimationHelper *animationHelper;
 
-@property (nonatomic, assign) id<FWTPopoverViewDelegate> delegate;
+@property (nonatomic, copy) FWTPopoverViewDidPresentBlock didPresentBlock;
+@property (nonatomic, copy) FWTPopoverViewDidDismissBlock didDismissBlock;
 
 //
 - (void)presentFromRect:(CGRect)rect inView:(UIView *)view permittedArrowDirection:(FWTPopoverArrowDirection)arrowDirection animated:(BOOL)animated;

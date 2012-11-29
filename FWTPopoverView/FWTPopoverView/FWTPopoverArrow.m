@@ -38,15 +38,10 @@
     UIEdgeInsets adjustedEdgeInsets = edgeInsets;
     CGFloat dY = self.size.height;
     
-    if (self.direction & FWTPopoverArrowDirectionUp)
-        adjustedEdgeInsets.top += dY;
-    else if (self.direction & FWTPopoverArrowDirectionLeft)
-        adjustedEdgeInsets.left += dY;
-    else if (self.direction & FWTPopoverArrowDirectionRight)
-        adjustedEdgeInsets.right += dY;
-    else if (self.direction & FWTPopoverArrowDirectionDown)
-        adjustedEdgeInsets.bottom += dY;
-    
+    if (self.direction & FWTPopoverArrowDirectionUp) adjustedEdgeInsets.top += dY;
+    else if (self.direction & FWTPopoverArrowDirectionLeft) adjustedEdgeInsets.left += dY;
+    else if (self.direction & FWTPopoverArrowDirectionRight) adjustedEdgeInsets.right += dY;
+    else if (self.direction & FWTPopoverArrowDirectionDown) adjustedEdgeInsets.bottom += dY;
     return adjustedEdgeInsets;
 }
 
