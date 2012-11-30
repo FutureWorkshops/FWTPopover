@@ -9,23 +9,26 @@
 #import "ViewController.h"
 #import "FWTPopoverView.h"
 
+CGFloat(^FWTRandomFloat)(CGFloat, CGFloat) = ^(CGFloat lowerBound, CGFloat upperBound){
+    CGFloat diff = upperBound - lowerBound;
+    return (((float) (arc4random() % ((unsigned)RAND_MAX + 1)) / RAND_MAX) * diff) + lowerBound;
+};
+
 @interface ViewController ()
 @property (nonatomic, retain) FWTPopoverView *popoverView;
 @property (nonatomic, retain) UIView *touchPointView;
-@property (nonatomic, retain) UISegmentedControl *segmentedControl;
 @property (nonatomic, assign) FWTPopoverArrowDirection popoverArrowDirection;
 @property (nonatomic, assign) BOOL manyPopoversEnabled;
 @end
 
 @implementation ViewController
-@synthesize segmentedControl = _segmentedControl;
 @synthesize popoverArrowDirection = _popoverArrowDirection;
 @synthesize touchPointView = _touchPointView;
 
 - (void)dealloc
 {
     self.touchPointView = nil;
-    self.segmentedControl = nil;
+    self.popoverView = nil;
     [super dealloc];
 }
 
@@ -33,6 +36,8 @@
 {
     if ((self = [super init]))
     {
+        //  add a switch to toggle from one to many popover at the same time
+        //
         UISwitch *manyPopoversSwitch = [[[UISwitch alloc] init] autorelease];
         [manyPopoversSwitch addTarget:self action:@selector(_manyPopoverSwitchValueChanged:) forControlEvents:UIControlEventValueChanged];
         self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithCustomView:manyPopoversSwitch] autorelease];
@@ -49,10 +54,18 @@
     [super loadView];
     
     //
-    self.view.backgroundColor = [UIColor colorWithWhite:.91f alpha:.35f];
-    self.navigationItem.titleView = self.segmentedControl;
-    self.popoverArrowDirection = pow(2, 0);
-    self.segmentedControl.selectedSegmentIndex = log2(self.popoverArrowDirection);
+    self.view.backgroundColor = [UIColor colorWithWhite:.91f alpha:.25f];
+    
+    self.popoverArrowDirection = pow(2, 0); //  store the selected arrow type
+    
+    //  allow to change arrow type
+    UISegmentedControl *segmentedControl = [[[UISegmentedControl alloc] initWithItems:@[@"N", @"U", @"D", @"L", @"R"]] autorelease];
+    segmentedControl.segmentedControlStyle = UISegmentedControlStyleBar;
+    segmentedControl.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    [segmentedControl addTarget:self action:@selector(_valueChangedForSegmentedControl:) forControlEvents:UIControlEventValueChanged];
+    segmentedControl.selectedSegmentIndex = log2(self.popoverArrowDirection);
+    [segmentedControl sizeToFit];
+    self.navigationItem.titleView = segmentedControl;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
@@ -61,20 +74,6 @@
 }
 
 #pragma mark - Getters
-- (UISegmentedControl *)segmentedControl
-{
-    if (!self->_segmentedControl)
-    {
-        self->_segmentedControl = [[UISegmentedControl alloc] initWithItems:@[@"N", @"U", @"D", @"L", @"R"]];
-        self->_segmentedControl.segmentedControlStyle = UISegmentedControlStyleBar;
-        self->_segmentedControl.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-        [self->_segmentedControl addTarget:self action:@selector(_valueChangedForSegmentedControl:) forControlEvents:UIControlEventValueChanged];
-        [self->_segmentedControl sizeToFit];
-    }
-    
-    return self->_segmentedControl;
-}
-
 - (UIView *)touchPointView
 {
     if (!self->_touchPointView)
@@ -96,30 +95,11 @@
 
 - (void)_didPressRightBarButton:(UIBarButtonItem *)barButton
 {
-    CALayer *niceLayer = [self _pleaseGiveMeANiceLayer];
-    [self.view.layer addSublayer:niceLayer];
-    
-    int64_t delayInSeconds = 1.0;
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        
-        NSArray *arrayCopy = [NSArray arrayWithArray:self.view.subviews];
-        [arrayCopy enumerateObjectsUsingBlock:^(UIView *subview, NSUInteger idx, BOOL *stop) {
-            if ([subview isKindOfClass:[FWTPopoverView class]])
-                [(FWTPopoverView *)subview dismissPopoverAnimated:YES];
-        }];
-    });
-    
-    delayInSeconds = 3.0;
-    popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        
-        [CATransaction begin];
-        [CATransaction setValue:[NSNumber numberWithFloat:1.0f] forKey:kCATransactionAnimationDuration];
-        niceLayer.opacity = 0.0;
-        [CATransaction setCompletionBlock:^{ [niceLayer removeFromSuperlayer]; }];
-        [CATransaction commit];
-    });
+    NSArray *arrayCopy = [NSArray arrayWithArray:self.view.subviews];
+    [arrayCopy enumerateObjectsUsingBlock:^(UIView *subview, NSUInteger idx, BOOL *stop) {
+        if ([subview isKindOfClass:[FWTPopoverView class]])
+            [(FWTPopoverView *)subview dismissPopoverAnimated:YES];
+    }];
 }
 
 - (void)_manyPopoverSwitchValueChanged:(UISwitch *)theSwitch
@@ -137,10 +117,11 @@
     if (!self.popoverView || self.manyPopoversEnabled)
     {
         self.popoverView = [[[FWTPopoverView alloc] init] autorelease];
+        self.popoverView.contentSize = CGSizeMake(self.popoverView.contentSize.width, ((int)FWTRandomFloat(60, 100))); // random height
         __block typeof(self) myself = self;
-        self.popoverView.didDismissBlock = ^(FWTPopoverView *av){ myself.popoverView = nil; };
-        CGColorRef fillColor = self.manyPopoversEnabled ? [self _pleaseGiveMeARandomColor].CGColor : self.popoverView.backgroundHelper.fillColor;
-        self.popoverView.backgroundHelper.fillColor = fillColor;
+        self.popoverView.didDismissBlock = ^(FWTPopoverView *av){ myself.popoverView = nil; }; // release
+        CGColorRef fillColor = self.manyPopoversEnabled ? [self _pleaseGiveMeARandomColor].CGColor : self.popoverView.backgroundHelper.fillColor;        
+        self.popoverView.backgroundHelper.fillColor = fillColor; // random color if many popover at the same time is enabled
         [self.popoverView presentFromRect:CGRectMake(point.x, point.y, 1.0f, 1.0f)
                                    inView:self.view
                   permittedArrowDirection:self.popoverArrowDirection
@@ -150,6 +131,7 @@
         [self.popoverView dismissPopoverAnimated:YES];
     
     
+    //  show the touch (useful to see how the adjustPositionInSuperviewEnabled works)
     //
     if (!self.touchPointView.superview) [self.view addSubview:self.touchPointView];
     self.touchPointView.center = point;
@@ -163,42 +145,6 @@
     NSInteger random = arc4random()%countOfItems;
     UIColor *color = [UIColor colorWithHue:(CGFloat)random/countOfItems saturation:.6f brightness:.7f alpha:.5f];
     return color;
-}
-
-- (CALayer *)_pleaseGiveMeANiceLayer
-{
-    CGRect frame = self.view.bounds;
-    CAEmitterLayer *smokeEmitter = [CAEmitterLayer layer];
-    smokeEmitter.emitterPosition = CGPointMake(frame.origin.x + frame.size.width / 2, frame.origin.y + frame.size.height / 2);
-    smokeEmitter.emitterSize = frame.size;
-    smokeEmitter.emitterShape = kCAEmitterLayerRectangle;
-    
-    CAEmitterCell *smokeCell = [CAEmitterCell emitterCell];
-    NSString *imageName = (arc4random()%100)>50?@"SmokeParticle.png":@"fwlogo.png";
-    smokeCell.contents = (id)[[UIImage imageNamed:imageName] CGImage];
-    [smokeCell setName:@"smokeCell"];
-    smokeCell.birthRate = 150;
-    smokeCell.lifetime = 1.0;
-    smokeCell.lifetimeRange = 0.35;
-    smokeCell.color = [[UIColor colorWithRed:0.6 green:0.6 blue:0.6 alpha:1.0] CGColor];
-    smokeCell.redRange = 1.0;
-    smokeCell.redSpeed = 0.5;
-    smokeCell.blueRange = 1.0;
-    smokeCell.blueSpeed = 0.5;
-    smokeCell.greenRange = 1.0;
-    smokeCell.greenSpeed = 0.5;
-    smokeCell.alphaSpeed = -0.2;
-    smokeCell.velocity = 50;
-    smokeCell.velocityRange = 20;
-    smokeCell.yAcceleration = -100;
-    smokeCell.emissionLongitude = -M_PI / 2;
-    smokeCell.emissionRange = M_PI / 4;
-    smokeCell.scale = 1.0;
-    smokeCell.scaleSpeed = 1.0;
-    smokeCell.scaleRange = 1.0;
-    smokeEmitter.emitterCells = [NSArray arrayWithObject:smokeCell];
-
-    return smokeEmitter;
 }
 
 
