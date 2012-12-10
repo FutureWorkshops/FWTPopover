@@ -60,6 +60,8 @@ In future release the backgroundHelper will support png images as in UIPopoverBa
 The sample project shows how to use and how to create a custom FWTProgressView.
 If you don't have time to read it this is what you need:
 
+``` objective-c
+
 	//	present
 	FWTPopoverView *popoverView = [[[FWTPopoverView alloc] init] autorelease];
 	popoverView.contentSize = CGSizeMake(240, 140);
@@ -68,11 +70,11 @@ If you don't have time to read it this is what you need:
          permittedArrowDirection:FWTPopoverArrowDirectionUp
                         animated:YES];
                         
-    […]
+    // …
     
     //	dismiss
     [popoverView dismissPopoverAnimated:YES];
-
+```
 
 ##Licensing
 Apache License Version 2.0
