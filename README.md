@@ -77,6 +77,9 @@ If you don't have time to read it this is what you need:
 ##Licensing
 Apache License Version 2.0
 
+##Credits
+[Saudi Telecom Mobile](http://www.stc.com.sa) Apps team, who enabled and collaborated with us to extract source code from My STC App for this library
+
 ##Support, bugs and feature requests
 If you want to submit a feature request, please do so via the issue tracker on github.
 If you want to submit a bug report, please also do so via the issue tracker, including a diagnosis of the problem and a suggested fix (in code).
