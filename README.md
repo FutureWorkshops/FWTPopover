@@ -80,7 +80,7 @@ If you don't have time to read it this is what you need:
 Apache License Version 2.0
 
 ##Credits
-[Saudi Telecom Mobile](http://www.stc.com.sa) Apps team, who enabled and collaborated with us to extract source code from My STC App for this library
+[Saudi Telecom](http://www.stc.com.sa) Mobile Apps team, who enabled and collaborated with us to extract source code from My STC App for this library
 
 ##Support, bugs and feature requests
 If you want to submit a feature request, please do so via the issue tracker on github.
