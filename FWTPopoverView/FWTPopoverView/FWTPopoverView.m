@@ -140,21 +140,21 @@ struct FWTPopoverViewFrameAndArrowAdjustment
     midPoint.y = CGRectGetHeight(rect) == 1.0f ? rect.origin.y : CGRectGetMidY(rect);
     
     if (self.arrow.direction & FWTPopoverArrowDirectionUp)
-        midPoint.x -= (popoverSize.width * .5f + self.arrow.cornerOffset);
+        midPoint.x -= (popoverSize.width * .5f + self.arrow.cornerOffset + self.arrow.offset);
     
     else if (self.arrow.direction & FWTPopoverArrowDirectionDown)
     {
-        midPoint.x -= (popoverSize.width * .5f + self.arrow.cornerOffset);
+        midPoint.x -= (popoverSize.width * .5f + self.arrow.cornerOffset + self.arrow.offset);
         midPoint.y -= popoverSize.height;
     }
     
     else if (self.arrow.direction & FWTPopoverArrowDirectionLeft)
-        midPoint.y -= (popoverSize.height * .5f + self.arrow.cornerOffset);
+        midPoint.y -= (popoverSize.height * .5f + self.arrow.cornerOffset + self.arrow.offset);
     
     else if (self.arrow.direction & FWTPopoverArrowDirectionRight)
     {
         midPoint.x -= popoverSize.width;
-        midPoint.y -= (popoverSize.height * .5f + self.arrow.cornerOffset);
+        midPoint.y -= (popoverSize.height * .5f + self.arrow.cornerOffset + self.arrow.offset);
     }
     
     else if (self.arrow.direction & FWTPopoverArrowDirectionNone)
@@ -233,7 +233,7 @@ struct FWTPopoverViewFrameAndArrowAdjustment
     
     //
     self.backgroundImageView.image = [self.backgroundHelper resizableBackgroundImageForSize:currentSize edgeInsets:self.edgeInsets];
-
+    
     //
     if (!animated)
     {
@@ -330,12 +330,14 @@ struct FWTPopoverViewFrameAndArrowAdjustment
     else if (self.arrow.direction & FWTPopoverArrowDirectionLeft)
     {
         toReturn.origin.y += (CGRectGetHeight(self.frame)-self.arrow.size.width)*.5f + self.arrow.offset;
-        toReturn.origin.x += self.edgeInsets.left-self.arrow.size.width;
+        toReturn.origin.x += self.suggestedEdgeInsets.left;//-self.arrow.size.width;
+        toReturn.size = CGSizeMake(self.arrow.size.height, self.arrow.size.width);
     }
     else if (self.arrow.direction & FWTPopoverArrowDirectionRight)
     {
         toReturn.origin.y += (CGRectGetHeight(self.frame)-self.arrow.size.width)*.5f + self.arrow.offset;
         toReturn.origin.x += (CGRectGetWidth(self.frame)-self.edgeInsets.right);
+        toReturn.size = CGSizeMake(self.arrow.size.height, self.arrow.size.width);
     }
     else if (self.arrow.direction & FWTPopoverArrowDirectionNone)
     {
