@@ -17,6 +17,8 @@ There are two optional blocks executed when the popover is presented/dismissed.
 
 This project is not yet ARC-ready.
 
+##Comparison with UIPopoverController* Block based API* Appearance/dismiss animations are easy to customise through animation blocks* Clean API to present/dismiss more than one popover either sequentially or at once* No minimum size restrictions for the popover content* Works on the iPhone as well as on the iPad
+
 ##How to use it: initializing
 
 Generally you don't initialize FWTPopoverView with a frame instead you set the contentSize and then call:
