@@ -1,0 +1,3 @@
+[submodule "RistrettoUI"]
+	path = RistrettoUI
+	url = git@github.com:marciomeschini/RistrettoUI.git

@@ -18,12 +18,9 @@ CGFloat(^FWTRandomFloat)(CGFloat, CGFloat) = ^(CGFloat lowerBound, CGFloat upper
 @property (nonatomic, retain) FWTPopoverView *popoverView;
 @property (nonatomic, retain) UIView *touchPointView;
 @property (nonatomic, assign) FWTPopoverArrowDirection popoverArrowDirection;
-@property (nonatomic, assign) BOOL manyPopoversEnabled;
 @end
 
 @implementation ViewController
-@synthesize popoverArrowDirection = _popoverArrowDirection;
-@synthesize touchPointView = _touchPointView;
 
 - (void)dealloc
 {
@@ -36,11 +33,6 @@ CGFloat(^FWTRandomFloat)(CGFloat, CGFloat) = ^(CGFloat lowerBound, CGFloat upper
 {
     if ((self = [super init]))
     {
-        //  add a switch to toggle from one to many popover at the same time
-        //
-        UISwitch *manyPopoversSwitch = [[[UISwitch alloc] init] autorelease];
-        [manyPopoversSwitch addTarget:self action:@selector(_manyPopoverSwitchValueChanged:) forControlEvents:UIControlEventValueChanged];
-        self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithCustomView:manyPopoversSwitch] autorelease];
         self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash
                                                                                                 target:self
                                                                                                 action:@selector(_didPressRightBarButton:)] autorelease];
@@ -53,8 +45,10 @@ CGFloat(^FWTRandomFloat)(CGFloat, CGFloat) = ^(CGFloat lowerBound, CGFloat upper
 {
     [super loadView];
     
-    //
-    self.view.backgroundColor = [UIColor colorWithWhite:.91f alpha:.25f];
+    self.tableView.scrollEnabled = NO;
+    
+    UITapGestureRecognizer *gesture = [[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(_handleGesture:)] autorelease];
+    [self.view addGestureRecognizer:gesture];
     
     self.popoverArrowDirection = pow(2, 0); //  store the selected arrow type
     
@@ -68,9 +62,28 @@ CGFloat(^FWTRandomFloat)(CGFloat, CGFloat) = ^(CGFloat lowerBound, CGFloat upper
     self.navigationItem.titleView = segmentedControl;
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+- (void)viewDidAppear:(BOOL)animated
 {
-    return YES;
+    [super viewDidAppear:animated];
+    
+    [self.navigationController setToolbarHidden:NO animated:YES];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    [self.navigationController setToolbarHidden:YES animated:YES];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    
+    [self.popoverView removeFromSuperview];
+    self.popoverView = nil;
+    
+    [self.view.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
 }
 
 #pragma mark - Getters
@@ -102,17 +115,11 @@ CGFloat(^FWTRandomFloat)(CGFloat, CGFloat) = ^(CGFloat lowerBound, CGFloat upper
     }];
 }
 
-- (void)_manyPopoverSwitchValueChanged:(UISwitch *)theSwitch
-{
-    self.manyPopoversEnabled = theSwitch.on;
-}
-
 #pragma mark - UIResponder
-- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    //
-    CGPoint point = [[touches anyObject] locationInView:self.view];
-
+- (void)_handleGesture:(UIGestureRecognizer *)gesture
+{    
+    CGPoint point = [gesture locationInView:gesture.view];
+    
     //
     if (!self.popoverView || self.manyPopoversEnabled)
     {
@@ -120,7 +127,7 @@ CGFloat(^FWTRandomFloat)(CGFloat, CGFloat) = ^(CGFloat lowerBound, CGFloat upper
         self.popoverView.contentSize = CGSizeMake(self.popoverView.contentSize.width, ((int)FWTRandomFloat(60, 100))); // random height
         __block typeof(self) myself = self;
         self.popoverView.didDismissBlock = ^(FWTPopoverView *av){ myself.popoverView = nil; }; // release
-        CGColorRef fillColor = self.manyPopoversEnabled ? [self _pleaseGiveMeARandomColor].CGColor : self.popoverView.backgroundHelper.fillColor;        
+        CGColorRef fillColor = self.manyPopoversEnabled ? [self _pleaseGiveMeARandomColor].CGColor : self.popoverView.backgroundHelper.fillColor;
         self.popoverView.backgroundHelper.fillColor = fillColor; // random color if many popover at the same time is enabled
         [self.popoverView presentFromRect:CGRectMake(point.x, point.y, 1.0f, 1.0f)
                                    inView:self.view

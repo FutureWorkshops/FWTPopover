@@ -19,6 +19,13 @@
 		A94900FF1641964E00864A8B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A94900FE1641964E00864A8B /* QuartzCore.framework */; };
 		A94901011641965100864A8B /* libFWTPopoverView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A94901001641965100864A8B /* libFWTPopoverView.a */; };
 		A9490104164196B000864A8B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A9490103164196B000864A8B /* ViewController.m */; };
+		A99CC57B170354E20070FF13 /* button_back.png in Resources */ = {isa = PBXBuildFile; fileRef = A99CC579170354E20070FF13 /* button_back.png */; };
+		A99CC57C170354E20070FF13 /* button_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A99CC57A170354E20070FF13 /* button_back@2x.png */; };
+		A99CC57F170357810070FF13 /* icon_popover.png in Resources */ = {isa = PBXBuildFile; fileRef = A99CC57D170357810070FF13 /* icon_popover.png */; };
+		A99CC580170357810070FF13 /* icon_popover@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A99CC57E170357810070FF13 /* icon_popover@2x.png */; };
+		A99CC5851703658E0070FF13 /* libRistrettoUI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A99CC5841703658E0070FF13 /* libRistrettoUI.a */; };
+		A9D14A551704884C00F64866 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = A9D14A541704884C00F64866 /* icon.png */; };
+		A9D14A571704885000F64866 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A9D14A561704885000F64866 /* icon@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +46,13 @@
 		A94901001641965100864A8B /* libFWTPopoverView.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFWTPopoverView.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9490102164196B000864A8B /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		A9490103164196B000864A8B /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		A99CC579170354E20070FF13 /* button_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_back.png; sourceTree = "<group>"; };
+		A99CC57A170354E20070FF13 /* button_back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_back@2x.png"; sourceTree = "<group>"; };
+		A99CC57D170357810070FF13 /* icon_popover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_popover.png; sourceTree = "<group>"; };
+		A99CC57E170357810070FF13 /* icon_popover@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_popover@2x.png"; sourceTree = "<group>"; };
+		A99CC5841703658E0070FF13 /* libRistrettoUI.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libRistrettoUI.a; path = "../../../../Library/Developer/Xcode/DerivedData/Build/Products/Debug-iphoneos/libRistrettoUI.a"; sourceTree = "<group>"; };
+		A9D14A541704884C00F64866 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = ../icon.png; sourceTree = "<group>"; };
+		A9D14A561704885000F64866 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon@2x.png"; path = "../icon@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,6 +60,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A99CC5851703658E0070FF13 /* libRistrettoUI.a in Frameworks */,
 				A94901011641965100864A8B /* libFWTPopoverView.a in Frameworks */,
 				A94900FF1641964E00864A8B /* QuartzCore.framework in Frameworks */,
 				A94900E21641963600864A8B /* UIKit.framework in Frameworks */,
@@ -77,6 +92,7 @@
 		A94900E01641963600864A8B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A99CC5841703658E0070FF13 /* libRistrettoUI.a */,
 				A94901001641965100864A8B /* libFWTPopoverView.a */,
 				A94900FE1641964E00864A8B /* QuartzCore.framework */,
 				A94900E11641963600864A8B /* UIKit.framework */,
@@ -91,8 +107,7 @@
 			children = (
 				A94900F01641963600864A8B /* AppDelegate.h */,
 				A94900F11641963600864A8B /* AppDelegate.m */,
-				A9490102164196B000864A8B /* ViewController.h */,
-				A9490103164196B000864A8B /* ViewController.m */,
+				A99CC5811703582C0070FF13 /* Sample */,
 				A94900E81641963600864A8B /* Supporting Files */,
 			);
 			path = FWTPopoverView_Test;
@@ -101,15 +116,30 @@
 		A94900E81641963600864A8B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				A9D14A561704885000F64866 /* icon@2x.png */,
+				A9D14A541704884C00F64866 /* icon.png */,
 				A94900E91641963600864A8B /* FWTPopoverView_Test-Info.plist */,
 				A94900EA1641963600864A8B /* InfoPlist.strings */,
 				A94900ED1641963600864A8B /* main.m */,
 				A94900EF1641963600864A8B /* FWTPopoverView_Test-Prefix.pch */,
+				A99CC57D170357810070FF13 /* icon_popover.png */,
+				A99CC57E170357810070FF13 /* icon_popover@2x.png */,
+				A99CC579170354E20070FF13 /* button_back.png */,
+				A99CC57A170354E20070FF13 /* button_back@2x.png */,
 				A94900F31641963600864A8B /* Default.png */,
 				A94900F51641963600864A8B /* Default@2x.png */,
 				A94900F71641963600864A8B /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A99CC5811703582C0070FF13 /* Sample */ = {
+			isa = PBXGroup;
+			children = (
+				A9490102164196B000864A8B /* ViewController.h */,
+				A9490103164196B000864A8B /* ViewController.m */,
+			);
+			name = Sample;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -167,6 +197,12 @@
 				A94900F41641963600864A8B /* Default.png in Resources */,
 				A94900F61641963600864A8B /* Default@2x.png in Resources */,
 				A94900F81641963600864A8B /* Default-568h@2x.png in Resources */,
+				A99CC57B170354E20070FF13 /* button_back.png in Resources */,
+				A99CC57C170354E20070FF13 /* button_back@2x.png in Resources */,
+				A99CC57F170357810070FF13 /* icon_popover.png in Resources */,
+				A99CC580170357810070FF13 /* icon_popover@2x.png in Resources */,
+				A9D14A551704884C00F64866 /* icon.png in Resources */,
+				A9D14A571704885000F64866 /* icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -218,8 +254,12 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../FWTPopoverView/FWTPopoverView/\"/**";
+				HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)/../FWTPopoverView/FWTPopoverView/\"/**",
+					"\"$(SRCROOT)/../RistrettoUI/RistrettoUI/\"",
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -239,9 +279,13 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../FWTPopoverView/FWTPopoverView/\"/**";
+				HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)/../FWTPopoverView/FWTPopoverView/\"/**",
+					"\"$(SRCROOT)/../RistrettoUI/RistrettoUI/\"",
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -257,7 +301,9 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../../Library/Developer/Xcode/DerivedData/FWTPopoverView-btyyvkntlkicerfbutllchdqvznt/Build/Products/Debug-iphoneos\"",
+					"\"$(SRCROOT)/../../../../Library/Developer/Xcode/DerivedData/Build/Products/Debug-iphoneos\"",
 				);
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -272,6 +318,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../../Library/Developer/Xcode/DerivedData/FWTPopoverView-btyyvkntlkicerfbutllchdqvznt/Build/Products/Debug-iphoneos\"",
+					"\"$(SRCROOT)/../../../../Library/Developer/Xcode/DerivedData/Build/Products/Debug-iphoneos\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
