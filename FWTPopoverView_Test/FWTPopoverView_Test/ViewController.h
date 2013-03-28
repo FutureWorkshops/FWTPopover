@@ -6,8 +6,8 @@
 //  Copyright (c) 2012 Marco Meschini. All rights reserved.
 //
 
-#import "RistrettoTableViewController.h"
+#import "RistrettoViewController.h"
 
-@interface ViewController : RistrettoTableViewController
+@interface ViewController : RistrettoViewController
 @property (nonatomic, assign) BOOL manyPopoversEnabled;
 @end

@@ -26,6 +26,8 @@
 		A99CC5851703658E0070FF13 /* libRistrettoUI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A99CC5841703658E0070FF13 /* libRistrettoUI.a */; };
 		A9D14A551704884C00F64866 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = A9D14A541704884C00F64866 /* icon.png */; };
 		A9D14A571704885000F64866 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A9D14A561704885000F64866 /* icon@2x.png */; };
+		A9D14A5A1704B83F00F64866 /* button_trash.png in Resources */ = {isa = PBXBuildFile; fileRef = A9D14A581704B83F00F64866 /* button_trash.png */; };
+		A9D14A5B1704B83F00F64866 /* button_trash@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A9D14A591704B83F00F64866 /* button_trash@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +55,8 @@
 		A99CC5841703658E0070FF13 /* libRistrettoUI.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libRistrettoUI.a; path = "../../../../Library/Developer/Xcode/DerivedData/Build/Products/Debug-iphoneos/libRistrettoUI.a"; sourceTree = "<group>"; };
 		A9D14A541704884C00F64866 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = ../icon.png; sourceTree = "<group>"; };
 		A9D14A561704885000F64866 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon@2x.png"; path = "../icon@2x.png"; sourceTree = "<group>"; };
+		A9D14A581704B83F00F64866 /* button_trash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_trash.png; sourceTree = "<group>"; };
+		A9D14A591704B83F00F64866 /* button_trash@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_trash@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +120,8 @@
 		A94900E81641963600864A8B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				A9D14A581704B83F00F64866 /* button_trash.png */,
+				A9D14A591704B83F00F64866 /* button_trash@2x.png */,
 				A9D14A561704885000F64866 /* icon@2x.png */,
 				A9D14A541704884C00F64866 /* icon.png */,
 				A94900E91641963600864A8B /* FWTPopoverView_Test-Info.plist */,
@@ -203,6 +209,8 @@
 				A99CC580170357810070FF13 /* icon_project@2x.png in Resources */,
 				A9D14A551704884C00F64866 /* icon.png in Resources */,
 				A9D14A571704885000F64866 /* icon@2x.png in Resources */,
+				A9D14A5A1704B83F00F64866 /* button_trash.png in Resources */,
+				A9D14A5B1704B83F00F64866 /* button_trash@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -18,53 +18,42 @@ CGFloat(^FWTRandomFloat)(CGFloat, CGFloat) = ^(CGFloat lowerBound, CGFloat upper
 @property (nonatomic, retain) FWTPopoverView *popoverView;
 @property (nonatomic, retain) UIView *touchPointView;
 @property (nonatomic, assign) FWTPopoverArrowDirection popoverArrowDirection;
+@property (nonatomic, retain) UISegmentedControl *segmentedControl;
 @end
 
 @implementation ViewController
 
 - (void)dealloc
 {
+    self.segmentedControl = nil;
     self.touchPointView = nil;
     self.popoverView = nil;
     [super dealloc];
-}
-
-- (id)init
-{
-    if ((self = [super init]))
-    {
-        self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash
-                                                                                                target:self
-                                                                                                action:@selector(_didPressRightBarButton:)] autorelease];
-    }
-    
-    return self;
 }
 
 - (void)loadView
 {
     [super loadView];
     
-    self.tableView.scrollEnabled = NO;
-    
-    UITapGestureRecognizer *gesture = [[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(_handleGesture:)] autorelease];
-    [self.view addGestureRecognizer:gesture];
+    if (self.manyPopoversEnabled)
+    {
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+        button.bounds = (CGRect){.0f, .0f, 32.0f, 32.0f};
+        [button setImage:[UIImage imageNamed:@"button_trash.png"] forState:UIControlStateNormal];
+        [button addTarget:self action:@selector(_didPressRightBarButton:) forControlEvents:UIControlEventTouchUpInside];
+        self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithCustomView:button] autorelease];
+    }
     
     self.popoverArrowDirection = pow(2, 0); //  store the selected arrow type
-    
-    //  allow to change arrow type
-    UISegmentedControl *segmentedControl = [[[UISegmentedControl alloc] initWithItems:@[@"N", @"U", @"D", @"L", @"R"]] autorelease];
-    segmentedControl.segmentedControlStyle = UISegmentedControlStyleBar;
-    segmentedControl.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    [segmentedControl addTarget:self action:@selector(_valueChangedForSegmentedControl:) forControlEvents:UIControlEventValueChanged];
-    segmentedControl.selectedSegmentIndex = log2(self.popoverArrowDirection);
-    [segmentedControl sizeToFit];
-    self.navigationItem.titleView = segmentedControl;
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    
+    CGRect bounds = self.navigationController.toolbar.bounds;
+    self.segmentedControl.center = CGPointMake(CGRectGetMidX(bounds), CGRectGetMidY(bounds));
+    [self.navigationController.toolbar addSubview:self.segmentedControl];
     
     [self.navigationController setToolbarHidden:NO animated:YES];
 }
@@ -100,6 +89,21 @@ CGFloat(^FWTRandomFloat)(CGFloat, CGFloat) = ^(CGFloat lowerBound, CGFloat upper
     return self->_touchPointView;
 }
 
+- (UISegmentedControl *)segmentedControl
+{
+    if (!self->_segmentedControl)
+    {
+        self->_segmentedControl = [[UISegmentedControl alloc] initWithItems:@[@"N", @"U", @"D", @"L", @"R"]];
+        self->_segmentedControl.segmentedControlStyle = UISegmentedControlStyleBar;
+        self->_segmentedControl.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+        [self->_segmentedControl addTarget:self action:@selector(_valueChangedForSegmentedControl:) forControlEvents:UIControlEventValueChanged];
+        self->_segmentedControl.selectedSegmentIndex = log2(self.popoverArrowDirection);
+        [self->_segmentedControl sizeToFit];
+    }
+    
+    return self->_segmentedControl;
+}
+
 #pragma mark - Actions
 - (void)_valueChangedForSegmentedControl:(UISegmentedControl *)segmentedControl
 {
@@ -116,9 +120,10 @@ CGFloat(^FWTRandomFloat)(CGFloat, CGFloat) = ^(CGFloat lowerBound, CGFloat upper
 }
 
 #pragma mark - UIResponder
-- (void)_handleGesture:(UIGestureRecognizer *)gesture
-{    
-    CGPoint point = [gesture locationInView:gesture.view];
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    //
+    CGPoint point = [[touches anyObject] locationInView:self.view];
     
     //
     if (!self.popoverView || self.manyPopoversEnabled)
