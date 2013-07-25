@@ -119,12 +119,12 @@ struct FWTPopoverViewFrameAndArrowAdjustment
     if (self.arrow.direction & FWTPopoverArrowDirectionUp || self.arrow.direction & FWTPopoverArrowDirectionDown)
     {
         arrowOffset = direction*dX;
-        maxArrowOffset = availableHalfRectSize.width - cornerRadius;
+        maxArrowOffset = availableHalfRectSize.width - self.arrow.size.width / 2.0f;
     }
     else if (self.arrow.direction & FWTPopoverArrowDirectionLeft || self.arrow.direction & FWTPopoverArrowDirectionRight)
     {
         arrowOffset = direction*dY;
-        maxArrowOffset = availableHalfRectSize.height - cornerRadius;
+        maxArrowOffset = availableHalfRectSize.height - self.arrow.size.width / 2.0f;
     }
     
     if (abs(arrowOffset) > maxArrowOffset)
